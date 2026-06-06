@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-label="Football stadium">
+  <defs>
+    <linearGradient id="sky" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#071827"/>
+      <stop offset="1" stop-color="#0f3b25"/>
+    </linearGradient>
+    <linearGradient id="pitch" x1="0" x2="1">
+      <stop offset="0" stop-color="#0c6b3e"/>
+      <stop offset="1" stop-color="#1aa35a"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="540" fill="url(#sky)"/>
+  <rect x="0" y="330" width="960" height="210" fill="url(#pitch)"/>
+  <g opacity="0.22" fill="#ffffff">
+    <rect x="0" y="0" width="960" height="18"/>
+    <rect x="0" y="70" width="960" height="12"/>
+    <rect x="0" y="126" width="960" height="10"/>
+  </g>
+  <g fill="#0a1018">
+    <path d="M80 288c105-95 720-95 825 0v76H80z"/>
+    <path d="M135 232c95-72 615-72 710 0v66H135z"/>
+  </g>
+  <g fill="#d6f6ff" opacity="0.78">
+    <circle cx="214" cy="246" r="5"/>
+    <circle cx="286" cy="224" r="5"/>
+    <circle cx="358" cy="212" r="5"/>
+    <circle cx="430" cy="205" r="5"/>
+    <circle cx="502" cy="205" r="5"/>
+    <circle cx="574" cy="212" r="5"/>
+    <circle cx="646" cy="224" r="5"/>
+    <circle cx="718" cy="246" r="5"/>
+  </g>
+  <g fill="none" stroke="#dfffea" stroke-width="5" opacity="0.72">
+    <rect x="88" y="356" width="784" height="150" rx="2"/>
+    <line x1="480" y1="356" x2="480" y2="506"/>
+    <circle cx="480" cy="431" r="48"/>
+    <rect x="88" y="386" width="112" height="90"/>
+    <rect x="760" y="386" width="112" height="90"/>
+  </g>
+  <g fill="#ffd23f">
+    <circle cx="120" cy="120" r="10"/>
+    <circle cx="860" cy="98" r="8"/>
+    <circle cx="480" cy="106" r="14"/>
+  </g>
+</svg>
