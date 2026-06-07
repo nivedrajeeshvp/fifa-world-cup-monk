@@ -65,20 +65,20 @@ const TEAMS = {
 
 const MATCHES = [
   // ─────────────── GROUP A  (Mexico · Korea Republic · Czechia · South Africa) ───────────────
-  { id: 'gA1', datetime: '2026-06-11T15:00:00-05:00', home: 'mex', away: 'zaf', venue: 'Estadio Azteca, Mexico City',               stage: 'Group A', status: 'upcoming' },
-  { id: 'gA2', datetime: '2026-06-11T22:00:00-05:00', home: 'kor', away: 'cze', venue: 'Estadio Akron, Guadalajara',                stage: 'Group A', status: 'upcoming' },
-  { id: 'gA3', datetime: '2026-06-18T21:00:00-05:00', home: 'mex', away: 'kor', venue: 'Estadio Akron, Guadalajara',                stage: 'Group A', status: 'upcoming' },
+  { id: 'gA1', datetime: '2026-06-11T14:00:00-05:00', home: 'mex', away: 'zaf', venue: 'Estadio Azteca, Mexico City',               stage: 'Group A', status: 'upcoming' },
+  { id: 'gA2', datetime: '2026-06-11T21:00:00-05:00', home: 'kor', away: 'cze', venue: 'Estadio Akron, Guadalajara',                stage: 'Group A', status: 'upcoming' },
+  { id: 'gA3', datetime: '2026-06-18T20:00:00-05:00', home: 'mex', away: 'kor', venue: 'Estadio Akron, Guadalajara',                stage: 'Group A', status: 'upcoming' },
   { id: 'gA4', datetime: '2026-06-18T12:00:00-04:00', home: 'cze', away: 'zaf', venue: 'Mercedes-Benz Stadium, Atlanta',            stage: 'Group A', status: 'upcoming' },
-  { id: 'gA5', datetime: '2026-06-24T21:00:00-05:00', home: 'cze', away: 'mex', venue: 'Estadio Azteca, Mexico City',               stage: 'Group A', status: 'upcoming' },
-  { id: 'gA6', datetime: '2026-06-24T21:00:00-06:00', home: 'zaf', away: 'kor', venue: 'Estadio BBVA, Monterrey',                   stage: 'Group A', status: 'upcoming' },
+  { id: 'gA5', datetime: '2026-06-24T20:00:00-05:00', home: 'cze', away: 'mex', venue: 'Estadio Azteca, Mexico City',               stage: 'Group A', status: 'upcoming' },
+  { id: 'gA6', datetime: '2026-06-24T19:00:00-06:00', home: 'zaf', away: 'kor', venue: 'Estadio BBVA, Monterrey',                   stage: 'Group A', status: 'upcoming' },
 
   // ─────────────── GROUP B  (Canada · Bosnia & Herzegovina · Qatar · Switzerland) ───────────────
   { id: 'gB1', datetime: '2026-06-12T15:00:00-04:00', home: 'can', away: 'bih', venue: 'BMO Field, Toronto',                        stage: 'Group B', status: 'upcoming' },
-  { id: 'gB2', datetime: '2026-06-13T15:00:00-07:00', home: 'qat', away: 'sui', venue: "Levi's Stadium, San Francisco",             stage: 'Group B', status: 'upcoming' },
-  { id: 'gB3', datetime: '2026-06-18T18:00:00-07:00', home: 'can', away: 'qat', venue: 'BC Place, Vancouver',                       stage: 'Group B', status: 'upcoming' },
-  { id: 'gB4', datetime: '2026-06-18T15:00:00-07:00', home: 'sui', away: 'bih', venue: 'SoFi Stadium, Los Angeles',                 stage: 'Group B', status: 'upcoming' },
-  { id: 'gB5', datetime: '2026-06-24T15:00:00-07:00', home: 'sui', away: 'can', venue: 'BC Place, Vancouver',                       stage: 'Group B', status: 'upcoming' },
-  { id: 'gB6', datetime: '2026-06-24T15:00:00-07:00', home: 'bih', away: 'qat', venue: 'Lumen Field, Seattle',                      stage: 'Group B', status: 'upcoming' },
+  { id: 'gB2', datetime: '2026-06-13T12:00:00-07:00', home: 'qat', away: 'sui', venue: "Levi's Stadium, San Francisco",             stage: 'Group B', status: 'upcoming' },
+  { id: 'gB3', datetime: '2026-06-18T15:00:00-07:00', home: 'can', away: 'qat', venue: 'BC Place, Vancouver',                       stage: 'Group B', status: 'upcoming' },
+  { id: 'gB4', datetime: '2026-06-18T12:00:00-07:00', home: 'sui', away: 'bih', venue: 'SoFi Stadium, Los Angeles',                 stage: 'Group B', status: 'upcoming' },
+  { id: 'gB5', datetime: '2026-06-24T12:00:00-07:00', home: 'sui', away: 'can', venue: 'BC Place, Vancouver',                       stage: 'Group B', status: 'upcoming' },
+  { id: 'gB6', datetime: '2026-06-24T12:00:00-07:00', home: 'bih', away: 'qat', venue: 'Lumen Field, Seattle',                      stage: 'Group B', status: 'upcoming' },
 
   // ─────────────── GROUP C  (Brazil · Haiti · Morocco · Scotland) ───────────────
   { id: 'gC1', datetime: '2026-06-13T18:00:00-04:00', home: 'bra', away: 'mar', venue: 'MetLife Stadium, New Jersey',               stage: 'Group C', status: 'upcoming' },
@@ -89,34 +89,34 @@ const MATCHES = [
   { id: 'gC6', datetime: '2026-06-24T18:00:00-04:00', home: 'mar', away: 'hti', venue: 'Mercedes-Benz Stadium, Atlanta',            stage: 'Group C', status: 'upcoming' },
 
   // ─────────────── GROUP D  (USA · Turkiye · Australia · Paraguay) ───────────────
-  { id: 'gD1', datetime: '2026-06-12T21:00:00-07:00', home: 'usa', away: 'pry', venue: 'SoFi Stadium, Los Angeles',                 stage: 'Group D', status: 'upcoming' },
+  { id: 'gD1', datetime: '2026-06-12T18:00:00-07:00', home: 'usa', away: 'pry', venue: 'SoFi Stadium, Los Angeles',                 stage: 'Group D', status: 'upcoming' },
   { id: 'gD2', datetime: '2026-06-14T00:00:00-04:00', home: 'aus', away: 'tur', venue: 'BC Place, Vancouver',                       stage: 'Group D', status: 'upcoming' },
-  { id: 'gD3', datetime: '2026-06-19T15:00:00-07:00', home: 'usa', away: 'aus', venue: 'Lumen Field, Seattle',                      stage: 'Group D', status: 'upcoming' },
+  { id: 'gD3', datetime: '2026-06-19T12:00:00-07:00', home: 'usa', away: 'aus', venue: 'Lumen Field, Seattle',                      stage: 'Group D', status: 'upcoming' },
   { id: 'gD4', datetime: '2026-06-19T23:00:00-04:00', home: 'tur', away: 'pry', venue: "Levi's Stadium, San Francisco",             stage: 'Group D', status: 'upcoming' },
-  { id: 'gD5', datetime: '2026-06-25T22:00:00-07:00', home: 'tur', away: 'usa', venue: 'SoFi Stadium, Los Angeles',                 stage: 'Group D', status: 'upcoming' },
-  { id: 'gD6', datetime: '2026-06-25T22:00:00-07:00', home: 'pry', away: 'aus', venue: "Levi's Stadium, San Francisco",             stage: 'Group D', status: 'upcoming' },
+  { id: 'gD5', datetime: '2026-06-25T19:00:00-07:00', home: 'tur', away: 'usa', venue: 'SoFi Stadium, Los Angeles',                 stage: 'Group D', status: 'upcoming' },
+  { id: 'gD6', datetime: '2026-06-25T19:00:00-07:00', home: 'pry', away: 'aus', venue: "Levi's Stadium, San Francisco",             stage: 'Group D', status: 'upcoming' },
 
   // ─────────────── GROUP E  (Germany · Cote d'Ivoire · Ecuador · Curacao) ───────────────
   { id: 'gE1', datetime: '2026-06-14T13:00:00-04:00', home: 'ger', away: 'cur', venue: 'NRG Stadium, Houston',                      stage: 'Group E', status: 'upcoming' },
   { id: 'gE2', datetime: '2026-06-14T19:00:00-04:00', home: 'civ', away: 'ecu', venue: 'Lincoln Financial Field, Philadelphia',     stage: 'Group E', status: 'upcoming' },
   { id: 'gE3', datetime: '2026-06-20T16:00:00-04:00', home: 'ger', away: 'civ', venue: 'BMO Field, Toronto',                        stage: 'Group E', status: 'upcoming' },
-  { id: 'gE4', datetime: '2026-06-20T20:00:00-05:00', home: 'ecu', away: 'cur', venue: 'Arrowhead Stadium, Kansas City',            stage: 'Group E', status: 'upcoming' },
+  { id: 'gE4', datetime: '2026-06-20T19:00:00-05:00', home: 'ecu', away: 'cur', venue: 'Arrowhead Stadium, Kansas City',            stage: 'Group E', status: 'upcoming' },
   { id: 'gE5', datetime: '2026-06-25T16:00:00-04:00', home: 'ecu', away: 'ger', venue: 'MetLife Stadium, New Jersey',               stage: 'Group E', status: 'upcoming' },
   { id: 'gE6', datetime: '2026-06-25T16:00:00-04:00', home: 'cur', away: 'civ', venue: 'Lincoln Financial Field, Philadelphia',     stage: 'Group E', status: 'upcoming' },
 
   // ─────────────── GROUP F  (Netherlands · Tunisia · Japan · Sweden) ───────────────
-  { id: 'gF1', datetime: '2026-06-14T16:00:00-05:00', home: 'ned', away: 'jpn', venue: 'AT&T Stadium, Dallas',                      stage: 'Group F', status: 'upcoming' },
-  { id: 'gF2', datetime: '2026-06-14T22:00:00-06:00', home: 'swe', away: 'tun', venue: 'Estadio BBVA, Monterrey',                   stage: 'Group F', status: 'upcoming' },
+  { id: 'gF1', datetime: '2026-06-14T15:00:00-05:00', home: 'ned', away: 'jpn', venue: 'AT&T Stadium, Dallas',                      stage: 'Group F', status: 'upcoming' },
+  { id: 'gF2', datetime: '2026-06-14T20:00:00-06:00', home: 'swe', away: 'tun', venue: 'Estadio BBVA, Monterrey',                   stage: 'Group F', status: 'upcoming' },
   { id: 'gF3', datetime: '2026-06-20T13:00:00-04:00', home: 'ned', away: 'swe', venue: 'NRG Stadium, Houston',                      stage: 'Group F', status: 'upcoming' },
-  { id: 'gF4', datetime: '2026-06-21T00:00:00-05:00', home: 'tun', away: 'jpn', venue: 'Estadio BBVA, Monterrey',                   stage: 'Group F', status: 'upcoming' },
-  { id: 'gF5', datetime: '2026-06-25T19:00:00-05:00', home: 'jpn', away: 'swe', venue: 'AT&T Stadium, Dallas',                      stage: 'Group F', status: 'upcoming' },
-  { id: 'gF6', datetime: '2026-06-25T19:00:00-05:00', home: 'tun', away: 'ned', venue: 'Arrowhead Stadium, Kansas City',            stage: 'Group F', status: 'upcoming' },
+  { id: 'gF4', datetime: '2026-06-20T23:00:00-05:00', home: 'tun', away: 'jpn', venue: 'Estadio BBVA, Monterrey',                   stage: 'Group F', status: 'upcoming' },
+  { id: 'gF5', datetime: '2026-06-25T18:00:00-05:00', home: 'jpn', away: 'swe', venue: 'AT&T Stadium, Dallas',                      stage: 'Group F', status: 'upcoming' },
+  { id: 'gF6', datetime: '2026-06-25T18:00:00-05:00', home: 'tun', away: 'ned', venue: 'Arrowhead Stadium, Kansas City',            stage: 'Group F', status: 'upcoming' },
 
   // ─────────────── GROUP G  (Belgium · New Zealand · Egypt · Iran) ───────────────
-  { id: 'gG1', datetime: '2026-06-15T15:00:00-07:00', home: 'bel', away: 'egy', venue: 'Lumen Field, Seattle',                      stage: 'Group G', status: 'upcoming' },
-  { id: 'gG2', datetime: '2026-06-15T21:00:00-07:00', home: 'irn', away: 'nzl', venue: 'SoFi Stadium, Los Angeles',                 stage: 'Group G', status: 'upcoming' },
-  { id: 'gG3', datetime: '2026-06-21T15:00:00-07:00', home: 'bel', away: 'irn', venue: 'SoFi Stadium, Los Angeles',                 stage: 'Group G', status: 'upcoming' },
-  { id: 'gG4', datetime: '2026-06-21T21:00:00-07:00', home: 'nzl', away: 'egy', venue: 'BC Place, Vancouver',                       stage: 'Group G', status: 'upcoming' },
+  { id: 'gG1', datetime: '2026-06-15T12:00:00-07:00', home: 'bel', away: 'egy', venue: 'Lumen Field, Seattle',                      stage: 'Group G', status: 'upcoming' },
+  { id: 'gG2', datetime: '2026-06-15T18:00:00-07:00', home: 'irn', away: 'nzl', venue: 'SoFi Stadium, Los Angeles',                 stage: 'Group G', status: 'upcoming' },
+  { id: 'gG3', datetime: '2026-06-21T12:00:00-07:00', home: 'bel', away: 'irn', venue: 'SoFi Stadium, Los Angeles',                 stage: 'Group G', status: 'upcoming' },
+  { id: 'gG4', datetime: '2026-06-21T18:00:00-07:00', home: 'nzl', away: 'egy', venue: 'BC Place, Vancouver',                       stage: 'Group G', status: 'upcoming' },
   { id: 'gG5', datetime: '2026-06-26T23:00:00-04:00', home: 'egy', away: 'irn', venue: 'Lumen Field, Seattle',                      stage: 'Group G', status: 'upcoming' },
   { id: 'gG6', datetime: '2026-06-26T23:00:00-04:00', home: 'nzl', away: 'bel', venue: 'BC Place, Vancouver',                       stage: 'Group G', status: 'upcoming' },
 
@@ -125,8 +125,8 @@ const MATCHES = [
   { id: 'gH2', datetime: '2026-06-15T18:00:00-04:00', home: 'ksa', away: 'uru', venue: 'Hard Rock Stadium, Miami',                  stage: 'Group H', status: 'upcoming' },
   { id: 'gH3', datetime: '2026-06-21T12:00:00-04:00', home: 'esp', away: 'ksa', venue: 'Mercedes-Benz Stadium, Atlanta',            stage: 'Group H', status: 'upcoming' },
   { id: 'gH4', datetime: '2026-06-21T18:00:00-04:00', home: 'uru', away: 'cpv', venue: 'Hard Rock Stadium, Miami',                  stage: 'Group H', status: 'upcoming' },
-  { id: 'gH5', datetime: '2026-06-26T20:00:00-05:00', home: 'cpv', away: 'ksa', venue: 'NRG Stadium, Houston',                      stage: 'Group H', status: 'upcoming' },
-  { id: 'gH6', datetime: '2026-06-26T20:00:00-05:00', home: 'uru', away: 'esp', venue: 'Estadio Akron, Guadalajara',                stage: 'Group H', status: 'upcoming' },
+  { id: 'gH5', datetime: '2026-06-26T19:00:00-05:00', home: 'cpv', away: 'ksa', venue: 'NRG Stadium, Houston',                      stage: 'Group H', status: 'upcoming' },
+  { id: 'gH6', datetime: '2026-06-26T19:00:00-05:00', home: 'uru', away: 'esp', venue: 'Estadio Akron, Guadalajara',                stage: 'Group H', status: 'upcoming' },
 
   // ─────────────── GROUP I  (France · Norway · Senegal · Iraq) ───────────────
   { id: 'gI1', datetime: '2026-06-16T15:00:00-04:00', home: 'fra', away: 'sen', venue: 'MetLife Stadium, New Jersey',               stage: 'Group I', status: 'upcoming' },
@@ -139,21 +139,21 @@ const MATCHES = [
   // ─────────────── GROUP J  (Argentina · Jordan · Algeria · Austria) ───────────────
   { id: 'gJ1', datetime: '2026-06-16T21:00:00-04:00', home: 'arg', away: 'alg', venue: 'Arrowhead Stadium, Kansas City',            stage: 'Group J', status: 'upcoming' },
   { id: 'gJ2', datetime: '2026-06-17T00:00:00-04:00', home: 'aut', away: 'jor', venue: "Levi's Stadium, San Francisco",             stage: 'Group J', status: 'upcoming' },
-  { id: 'gJ3', datetime: '2026-06-22T13:00:00-05:00', home: 'arg', away: 'aut', venue: 'AT&T Stadium, Dallas',                      stage: 'Group J', status: 'upcoming' },
-  { id: 'gJ4', datetime: '2026-06-22T23:00:00-07:00', home: 'jor', away: 'alg', venue: "Levi's Stadium, San Francisco",             stage: 'Group J', status: 'upcoming' },
-  { id: 'gJ5', datetime: '2026-06-27T22:00:00-05:00', home: 'alg', away: 'aut', venue: 'Arrowhead Stadium, Kansas City',            stage: 'Group J', status: 'upcoming' },
-  { id: 'gJ6', datetime: '2026-06-27T22:00:00-05:00', home: 'jor', away: 'arg', venue: 'AT&T Stadium, Dallas',                      stage: 'Group J', status: 'upcoming' },
+  { id: 'gJ3', datetime: '2026-06-22T12:00:00-05:00', home: 'arg', away: 'aut', venue: 'AT&T Stadium, Dallas',                      stage: 'Group J', status: 'upcoming' },
+  { id: 'gJ4', datetime: '2026-06-22T20:00:00-07:00', home: 'jor', away: 'alg', venue: "Levi's Stadium, San Francisco",             stage: 'Group J', status: 'upcoming' },
+  { id: 'gJ5', datetime: '2026-06-27T21:00:00-05:00', home: 'alg', away: 'aut', venue: 'Arrowhead Stadium, Kansas City',            stage: 'Group J', status: 'upcoming' },
+  { id: 'gJ6', datetime: '2026-06-27T21:00:00-05:00', home: 'jor', away: 'arg', venue: 'AT&T Stadium, Dallas',                      stage: 'Group J', status: 'upcoming' },
 
   // ─────────────── GROUP K  (Portugal · Uzbekistan · Colombia · Congo DR) ───────────────
   { id: 'gK1', datetime: '2026-06-17T13:00:00-04:00', home: 'por', away: 'cod', venue: 'NRG Stadium, Houston',                      stage: 'Group K', status: 'upcoming' },
-  { id: 'gK2', datetime: '2026-06-17T22:00:00-05:00', home: 'uzb', away: 'col', venue: 'Estadio Azteca, Mexico City',               stage: 'Group K', status: 'upcoming' },
+  { id: 'gK2', datetime: '2026-06-17T21:00:00-05:00', home: 'uzb', away: 'col', venue: 'Estadio Azteca, Mexico City',               stage: 'Group K', status: 'upcoming' },
   { id: 'gK3', datetime: '2026-06-23T13:00:00-04:00', home: 'por', away: 'uzb', venue: 'NRG Stadium, Houston',                      stage: 'Group K', status: 'upcoming' },
-  { id: 'gK4', datetime: '2026-06-23T22:00:00-05:00', home: 'col', away: 'cod', venue: 'Estadio Akron, Guadalajara',                stage: 'Group K', status: 'upcoming' },
+  { id: 'gK4', datetime: '2026-06-23T21:00:00-05:00', home: 'col', away: 'cod', venue: 'Estadio Akron, Guadalajara',                stage: 'Group K', status: 'upcoming' },
   { id: 'gK5', datetime: '2026-06-27T19:30:00-04:00', home: 'col', away: 'por', venue: 'Hard Rock Stadium, Miami',                  stage: 'Group K', status: 'upcoming' },
   { id: 'gK6', datetime: '2026-06-27T19:30:00-04:00', home: 'cod', away: 'uzb', venue: 'Mercedes-Benz Stadium, Atlanta',            stage: 'Group K', status: 'upcoming' },
 
   // ─────────────── GROUP L  (England · Croatia · Ghana · Panama) ───────────────
-  { id: 'gL1', datetime: '2026-06-17T16:00:00-05:00', home: 'eng', away: 'cro', venue: 'AT&T Stadium, Dallas',                      stage: 'Group L', status: 'upcoming' },
+  { id: 'gL1', datetime: '2026-06-17T15:00:00-05:00', home: 'eng', away: 'cro', venue: 'AT&T Stadium, Dallas',                      stage: 'Group L', status: 'upcoming' },
   { id: 'gL2', datetime: '2026-06-17T19:00:00-04:00', home: 'gha', away: 'pan', venue: 'BMO Field, Toronto',                        stage: 'Group L', status: 'upcoming' },
   { id: 'gL3', datetime: '2026-06-23T16:00:00-04:00', home: 'eng', away: 'gha', venue: 'Gillette Stadium, Boston',                  stage: 'Group L', status: 'upcoming' },
   { id: 'gL4', datetime: '2026-06-23T19:00:00-04:00', home: 'pan', away: 'cro', venue: 'BMO Field, Toronto',                        stage: 'Group L', status: 'upcoming' },
@@ -161,12 +161,12 @@ const MATCHES = [
   { id: 'gL6', datetime: '2026-06-27T17:00:00-04:00', home: 'cro', away: 'gha', venue: 'Lincoln Financial Field, Philadelphia',     stage: 'Group L', status: 'upcoming' },
 
   // ─────────────── ROUND OF 32  (Jun 28 – Jul 3) ───────────────
-  { id: 'r32a', datetime: '2026-06-28T12:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'MetLife Stadium, New Jersey',              stage: 'Round of 32', status: 'upcoming' },
-  { id: 'r32b', datetime: '2026-06-28T15:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'SoFi Stadium, Los Angeles',                stage: 'Round of 32', status: 'upcoming' },
-  { id: 'r32c', datetime: '2026-06-28T21:30:00-04:00', home: 'tbd', away: 'tbd', venue: 'SoFi Stadium, Los Angeles',                stage: 'Round of 32', status: 'upcoming' },
-  { id: 'r32d', datetime: '2026-06-29T12:00:00-05:00', home: 'tbd', away: 'tbd', venue: 'AT&T Stadium, Dallas',                     stage: 'Round of 32', status: 'upcoming' },
-  { id: 'r32e', datetime: '2026-06-29T20:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'Estadio Azteca, Mexico City',              stage: 'Round of 32', status: 'upcoming' },
-  { id: 'r32f', datetime: '2026-06-29T22:00:00-05:00', home: 'tbd', away: 'tbd', venue: 'Estadio Azteca, Mexico City',              stage: 'Round of 32', status: 'upcoming' },
+  { id: 'r32a', datetime: '2026-06-28T15:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'MetLife Stadium, New Jersey',              stage: 'Round of 32', status: 'upcoming' },
+  { id: 'r32b', datetime: '2026-06-29T13:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'SoFi Stadium, Los Angeles',                stage: 'Round of 32', status: 'upcoming' },
+  { id: 'r32c', datetime: '2026-06-29T16:30:00-04:00', home: 'tbd', away: 'tbd', venue: 'SoFi Stadium, Los Angeles',                stage: 'Round of 32', status: 'upcoming' },
+  { id: 'r32d', datetime: '2026-06-29T20:00:00-05:00', home: 'tbd', away: 'tbd', venue: 'AT&T Stadium, Dallas',                     stage: 'Round of 32', status: 'upcoming' },
+  { id: 'r32e', datetime: '2026-06-30T13:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'Estadio Azteca, Mexico City',              stage: 'Round of 32', status: 'upcoming' },
+  { id: 'r32f', datetime: '2026-06-30T16:00:00-05:00', home: 'tbd', away: 'tbd', venue: 'Estadio Azteca, Mexico City',              stage: 'Round of 32', status: 'upcoming' },
   { id: 'r32g', datetime: '2026-06-30T12:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'Estadio BBVA, Monterrey',                  stage: 'Round of 32', status: 'upcoming' },
   { id: 'r32h', datetime: '2026-06-30T16:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'MetLife Stadium, New Jersey',              stage: 'Round of 32', status: 'upcoming' },
   { id: 'r32i', datetime: '2026-06-30T21:30:00-05:00', home: 'tbd', away: 'tbd', venue: 'Estadio BBVA, Monterrey',                  stage: 'Round of 32', status: 'upcoming' },
@@ -190,12 +190,12 @@ const MATCHES = [
 
   // ─────────────── QUARTER-FINALS  (Jul 9–11) ───────────────
   { id: 'qf1',  datetime: '2026-07-09T16:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'Gillette Stadium, Boston',                 stage: 'Quarter-final', status: 'upcoming' },
-  { id: 'qf2',  datetime: '2026-07-10T15:00:00-07:00', home: 'tbd', away: 'tbd', venue: 'SoFi Stadium, Los Angeles',                stage: 'Quarter-final', status: 'upcoming' },
+  { id: 'qf2',  datetime: '2026-07-10T12:00:00-07:00', home: 'tbd', away: 'tbd', venue: 'SoFi Stadium, Los Angeles',                stage: 'Quarter-final', status: 'upcoming' },
   { id: 'qf3',  datetime: '2026-07-11T17:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'Hard Rock Stadium, Miami',                 stage: 'Quarter-final', status: 'upcoming' },
-  { id: 'qf4',  datetime: '2026-07-11T21:00:00-05:00', home: 'tbd', away: 'tbd', venue: 'Arrowhead Stadium, Kansas City',           stage: 'Quarter-final', status: 'upcoming' },
+  { id: 'qf4',  datetime: '2026-07-11T20:00:00-05:00', home: 'tbd', away: 'tbd', venue: 'Arrowhead Stadium, Kansas City',           stage: 'Quarter-final', status: 'upcoming' },
 
   // ─────────────── SEMI-FINALS  (Jul 14–15) ───────────────
-  { id: 'sf1',  datetime: '2026-07-14T15:00:00-05:00', home: 'tbd', away: 'tbd', venue: 'AT&T Stadium, Dallas',                     stage: 'Semi-final', status: 'upcoming' },
+  { id: 'sf1',  datetime: '2026-07-14T14:00:00-05:00', home: 'tbd', away: 'tbd', venue: 'AT&T Stadium, Dallas',                     stage: 'Semi-final', status: 'upcoming' },
   { id: 'sf2',  datetime: '2026-07-15T15:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'Mercedes-Benz Stadium, Atlanta',           stage: 'Semi-final', status: 'upcoming' },
 
   // ─────────────── THIRD PLACE & FINAL ───────────────
