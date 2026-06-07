@@ -3,7 +3,7 @@ import './App.css';
 import monkLogo from './world-cup-monk-logo.png';
 import stadiumFallback from './stadium-fallback.svg';
 
-const WORLD_CUP_START = new Date('2026-06-11T19:00:00-06:00');
+const WORLD_CUP_START = new Date('2026-06-11T15:00:00-04:00');
 const FAVORITES_KEY = 'wchq-favorites';
 
 const TEAMS = {
@@ -57,148 +57,150 @@ const TEAMS = {
   uzb: { name: 'Uzbekistan',            code: 'UZB', flag: '', group: 'K', ranking: 50, participations: 0 },
 };
 
+// All times stored as local kickoff times with UTC offset.
+// The app converts to IST (UTC+5:30) automatically via Intl/toLocaleDateString.
+// EDT = UTC-4  |  CDT = UTC-5  |  MDT = UTC-6  |  PDT = UTC-7
+// Toronto/Vancouver are also EDT/PDT respectively.
+// IST reference: 3 PM EDT = 12:30 AM IST next day; 9 PM EDT = 6:30 AM IST next day
+
 const MATCHES = [
-  //  FRIENDLIES 
-  { id: 'm0a', datetime: '2026-06-05T20:00:00-05:00', home: 'fra', away: 'bel', venue: 'AT&T Stadium, Dallas',                      stage: 'Friendly', status: 'upcoming' },
-  { id: 'm0b', datetime: '2026-06-05T22:30:00-04:00', home: 'arg', away: 'bra', venue: 'Hard Rock Stadium, Miami',                  stage: 'Friendly', status: 'upcoming' },
+  // ─────────────── GROUP A  (Mexico · Korea Republic · Czechia · South Africa) ───────────────
+  { id: 'gA1', datetime: '2026-06-11T15:00:00-05:00', home: 'mex', away: 'zaf', venue: 'Estadio Azteca, Mexico City',               stage: 'Group A', status: 'upcoming' },
+  { id: 'gA2', datetime: '2026-06-11T22:00:00-05:00', home: 'kor', away: 'cze', venue: 'Estadio Akron, Guadalajara',                stage: 'Group A', status: 'upcoming' },
+  { id: 'gA3', datetime: '2026-06-18T21:00:00-05:00', home: 'mex', away: 'kor', venue: 'Estadio Akron, Guadalajara',                stage: 'Group A', status: 'upcoming' },
+  { id: 'gA4', datetime: '2026-06-18T12:00:00-04:00', home: 'cze', away: 'zaf', venue: 'Mercedes-Benz Stadium, Atlanta',            stage: 'Group A', status: 'upcoming' },
+  { id: 'gA5', datetime: '2026-06-24T21:00:00-05:00', home: 'cze', away: 'mex', venue: 'Estadio Azteca, Mexico City',               stage: 'Group A', status: 'upcoming' },
+  { id: 'gA6', datetime: '2026-06-24T21:00:00-06:00', home: 'zaf', away: 'kor', venue: 'Estadio BBVA, Monterrey',                   stage: 'Group A', status: 'upcoming' },
 
-  //  GROUP A  (Mexico  Korea Republic  Czechia  South Africa) 
-  { id: 'gA1', datetime: '2026-06-11T19:00:00-06:00', home: 'mex', away: 'zaf', venue: 'Estadio Azteca, Mexico City',               stage: 'Group A', status: 'upcoming' },
-  { id: 'gA2', datetime: '2026-06-11T22:00:00-06:00', home: 'kor', away: 'cze', venue: 'AT&T Stadium, Dallas',                      stage: 'Group A', status: 'upcoming' },
-  { id: 'gA3', datetime: '2026-06-15T16:00:00-06:00', home: 'mex', away: 'kor', venue: 'Estadio Azteca, Mexico City',               stage: 'Group A', status: 'upcoming' },
-  { id: 'gA4', datetime: '2026-06-15T19:00:00-06:00', home: 'cze', away: 'zaf', venue: 'AT&T Stadium, Dallas',                      stage: 'Group A', status: 'upcoming' },
-  { id: 'gA5', datetime: '2026-06-19T18:00:00-06:00', home: 'mex', away: 'cze', venue: 'Estadio Azteca, Mexico City',               stage: 'Group A', status: 'upcoming' },
-  { id: 'gA6', datetime: '2026-06-19T18:00:00-06:00', home: 'zaf', away: 'kor', venue: 'AT&T Stadium, Dallas',                      stage: 'Group A', status: 'upcoming' },
+  // ─────────────── GROUP B  (Canada · Bosnia & Herzegovina · Qatar · Switzerland) ───────────────
+  { id: 'gB1', datetime: '2026-06-12T15:00:00-04:00', home: 'can', away: 'bih', venue: 'BMO Field, Toronto',                        stage: 'Group B', status: 'upcoming' },
+  { id: 'gB2', datetime: '2026-06-13T15:00:00-07:00', home: 'qat', away: 'sui', venue: "Levi's Stadium, San Francisco",             stage: 'Group B', status: 'upcoming' },
+  { id: 'gB3', datetime: '2026-06-18T18:00:00-07:00', home: 'can', away: 'qat', venue: 'BC Place, Vancouver',                       stage: 'Group B', status: 'upcoming' },
+  { id: 'gB4', datetime: '2026-06-18T15:00:00-07:00', home: 'sui', away: 'bih', venue: 'SoFi Stadium, Los Angeles',                 stage: 'Group B', status: 'upcoming' },
+  { id: 'gB5', datetime: '2026-06-24T15:00:00-07:00', home: 'sui', away: 'can', venue: 'BC Place, Vancouver',                       stage: 'Group B', status: 'upcoming' },
+  { id: 'gB6', datetime: '2026-06-24T15:00:00-07:00', home: 'bih', away: 'qat', venue: 'Lumen Field, Seattle',                      stage: 'Group B', status: 'upcoming' },
 
-  //  GROUP B  (Canada  Bosnia & Herzegovina  Qatar  Switzerland) 
-  { id: 'gB1', datetime: '2026-06-12T13:00:00-04:00', home: 'can', away: 'bih', venue: 'BMO Field, Toronto',                        stage: 'Group B', status: 'upcoming' },
-  { id: 'gB2', datetime: '2026-06-12T16:00:00-04:00', home: 'qat', away: 'sui', venue: 'BC Place, Vancouver',                       stage: 'Group B', status: 'upcoming' },
-  { id: 'gB3', datetime: '2026-06-16T13:00:00-04:00', home: 'can', away: 'qat', venue: 'BMO Field, Toronto',                        stage: 'Group B', status: 'upcoming' },
-  { id: 'gB4', datetime: '2026-06-16T16:00:00-04:00', home: 'sui', away: 'bih', venue: 'BC Place, Vancouver',                       stage: 'Group B', status: 'upcoming' },
-  { id: 'gB5', datetime: '2026-06-20T18:00:00-04:00', home: 'can', away: 'sui', venue: 'BMO Field, Toronto',                        stage: 'Group B', status: 'upcoming' },
-  { id: 'gB6', datetime: '2026-06-20T18:00:00-04:00', home: 'bih', away: 'qat', venue: 'BC Place, Vancouver',                       stage: 'Group B', status: 'upcoming' },
+  // ─────────────── GROUP C  (Brazil · Haiti · Morocco · Scotland) ───────────────
+  { id: 'gC1', datetime: '2026-06-13T18:00:00-04:00', home: 'bra', away: 'mar', venue: 'MetLife Stadium, New Jersey',               stage: 'Group C', status: 'upcoming' },
+  { id: 'gC2', datetime: '2026-06-13T21:00:00-04:00', home: 'hti', away: 'sco', venue: 'Gillette Stadium, Boston',                  stage: 'Group C', status: 'upcoming' },
+  { id: 'gC3', datetime: '2026-06-19T18:00:00-04:00', home: 'sco', away: 'mar', venue: 'Gillette Stadium, Boston',                  stage: 'Group C', status: 'upcoming' },
+  { id: 'gC4', datetime: '2026-06-19T20:30:00-04:00', home: 'bra', away: 'hti', venue: 'Lincoln Financial Field, Philadelphia',     stage: 'Group C', status: 'upcoming' },
+  { id: 'gC5', datetime: '2026-06-24T18:00:00-04:00', home: 'sco', away: 'bra', venue: 'Hard Rock Stadium, Miami',                  stage: 'Group C', status: 'upcoming' },
+  { id: 'gC6', datetime: '2026-06-24T18:00:00-04:00', home: 'mar', away: 'hti', venue: 'Mercedes-Benz Stadium, Atlanta',            stage: 'Group C', status: 'upcoming' },
 
-  //  GROUP C  (Brazil  Haiti  Morocco  Scotland) 
-  { id: 'gC1', datetime: '2026-06-12T13:00:00-05:00', home: 'bra', away: 'hti', venue: 'Estadio Akron, Guadalajara',                stage: 'Group C', status: 'upcoming' },
-  { id: 'gC2', datetime: '2026-06-12T16:00:00-05:00', home: 'mar', away: 'sco', venue: 'SoFi Stadium, Los Angeles',                 stage: 'Group C', status: 'upcoming' },
-  { id: 'gC3', datetime: '2026-06-16T13:00:00-05:00', home: 'bra', away: 'mar', venue: 'Estadio Akron, Guadalajara',                stage: 'Group C', status: 'upcoming' },
-  { id: 'gC4', datetime: '2026-06-16T16:00:00-05:00', home: 'sco', away: 'hti', venue: 'SoFi Stadium, Los Angeles',                 stage: 'Group C', status: 'upcoming' },
-  { id: 'gC5', datetime: '2026-06-20T18:00:00-05:00', home: 'bra', away: 'sco', venue: 'Estadio Akron, Guadalajara',                stage: 'Group C', status: 'upcoming' },
-  { id: 'gC6', datetime: '2026-06-20T18:00:00-05:00', home: 'hti', away: 'mar', venue: 'SoFi Stadium, Los Angeles',                 stage: 'Group C', status: 'upcoming' },
+  // ─────────────── GROUP D  (USA · Turkiye · Australia · Paraguay) ───────────────
+  { id: 'gD1', datetime: '2026-06-12T21:00:00-07:00', home: 'usa', away: 'pry', venue: 'SoFi Stadium, Los Angeles',                 stage: 'Group D', status: 'upcoming' },
+  { id: 'gD2', datetime: '2026-06-14T00:00:00-04:00', home: 'aus', away: 'tur', venue: 'BC Place, Vancouver',                       stage: 'Group D', status: 'upcoming' },
+  { id: 'gD3', datetime: '2026-06-19T15:00:00-07:00', home: 'usa', away: 'aus', venue: 'Lumen Field, Seattle',                      stage: 'Group D', status: 'upcoming' },
+  { id: 'gD4', datetime: '2026-06-19T23:00:00-04:00', home: 'tur', away: 'pry', venue: "Levi's Stadium, San Francisco",             stage: 'Group D', status: 'upcoming' },
+  { id: 'gD5', datetime: '2026-06-25T22:00:00-07:00', home: 'tur', away: 'usa', venue: 'SoFi Stadium, Los Angeles',                 stage: 'Group D', status: 'upcoming' },
+  { id: 'gD6', datetime: '2026-06-25T22:00:00-07:00', home: 'pry', away: 'aus', venue: "Levi's Stadium, San Francisco",             stage: 'Group D', status: 'upcoming' },
 
-  //  GROUP D  (USA  Turkiye  Australia  Paraguay) 
-  { id: 'gD1', datetime: '2026-06-12T16:00:00-07:00', home: 'usa', away: 'tur', venue: 'SoFi Stadium, Los Angeles',                 stage: 'Group D', status: 'upcoming' },
-  { id: 'gD2', datetime: '2026-06-12T19:00:00-07:00', home: 'aus', away: 'pry', venue: "Levi's Stadium, San Francisco",             stage: 'Group D', status: 'upcoming' },
-  { id: 'gD3', datetime: '2026-06-16T16:00:00-07:00', home: 'usa', away: 'aus', venue: 'SoFi Stadium, Los Angeles',                 stage: 'Group D', status: 'upcoming' },
-  { id: 'gD4', datetime: '2026-06-16T19:00:00-07:00', home: 'pry', away: 'tur', venue: "Levi's Stadium, San Francisco",             stage: 'Group D', status: 'upcoming' },
-  { id: 'gD5', datetime: '2026-06-20T18:00:00-07:00', home: 'usa', away: 'pry', venue: 'SoFi Stadium, Los Angeles',                 stage: 'Group D', status: 'upcoming' },
-  { id: 'gD6', datetime: '2026-06-20T18:00:00-07:00', home: 'tur', away: 'aus', venue: "Levi's Stadium, San Francisco",             stage: 'Group D', status: 'upcoming' },
+  // ─────────────── GROUP E  (Germany · Cote d'Ivoire · Ecuador · Curacao) ───────────────
+  { id: 'gE1', datetime: '2026-06-14T13:00:00-04:00', home: 'ger', away: 'cur', venue: 'NRG Stadium, Houston',                      stage: 'Group E', status: 'upcoming' },
+  { id: 'gE2', datetime: '2026-06-14T19:00:00-04:00', home: 'civ', away: 'ecu', venue: 'Lincoln Financial Field, Philadelphia',     stage: 'Group E', status: 'upcoming' },
+  { id: 'gE3', datetime: '2026-06-20T16:00:00-04:00', home: 'ger', away: 'civ', venue: 'BMO Field, Toronto',                        stage: 'Group E', status: 'upcoming' },
+  { id: 'gE4', datetime: '2026-06-20T20:00:00-05:00', home: 'ecu', away: 'cur', venue: 'Arrowhead Stadium, Kansas City',            stage: 'Group E', status: 'upcoming' },
+  { id: 'gE5', datetime: '2026-06-25T16:00:00-04:00', home: 'ecu', away: 'ger', venue: 'MetLife Stadium, New Jersey',               stage: 'Group E', status: 'upcoming' },
+  { id: 'gE6', datetime: '2026-06-25T16:00:00-04:00', home: 'cur', away: 'civ', venue: 'Lincoln Financial Field, Philadelphia',     stage: 'Group E', status: 'upcoming' },
 
-  //  GROUP E  (Germany  Cote d'Ivoire  Ecuador  Curacao) 
-  { id: 'gE1', datetime: '2026-06-13T13:00:00-05:00', home: 'ger', away: 'civ', venue: 'Mercedes-Benz Stadium, Atlanta',            stage: 'Group E', status: 'upcoming' },
-  { id: 'gE2', datetime: '2026-06-13T16:00:00-05:00', home: 'ecu', away: 'cur', venue: 'Hard Rock Stadium, Miami',                  stage: 'Group E', status: 'upcoming' },
-  { id: 'gE3', datetime: '2026-06-17T13:00:00-05:00', home: 'ger', away: 'ecu', venue: 'Mercedes-Benz Stadium, Atlanta',            stage: 'Group E', status: 'upcoming' },
-  { id: 'gE4', datetime: '2026-06-17T16:00:00-05:00', home: 'civ', away: 'cur', venue: 'Hard Rock Stadium, Miami',                  stage: 'Group E', status: 'upcoming' },
-  { id: 'gE5', datetime: '2026-06-21T18:00:00-05:00', home: 'ger', away: 'cur', venue: 'Mercedes-Benz Stadium, Atlanta',            stage: 'Group E', status: 'upcoming' },
-  { id: 'gE6', datetime: '2026-06-21T18:00:00-05:00', home: 'ecu', away: 'civ', venue: 'Hard Rock Stadium, Miami',                  stage: 'Group E', status: 'upcoming' },
+  // ─────────────── GROUP F  (Netherlands · Tunisia · Japan · Sweden) ───────────────
+  { id: 'gF1', datetime: '2026-06-14T16:00:00-05:00', home: 'ned', away: 'jpn', venue: 'AT&T Stadium, Dallas',                      stage: 'Group F', status: 'upcoming' },
+  { id: 'gF2', datetime: '2026-06-14T22:00:00-06:00', home: 'swe', away: 'tun', venue: 'Estadio BBVA, Monterrey',                   stage: 'Group F', status: 'upcoming' },
+  { id: 'gF3', datetime: '2026-06-20T13:00:00-04:00', home: 'ned', away: 'swe', venue: 'NRG Stadium, Houston',                      stage: 'Group F', status: 'upcoming' },
+  { id: 'gF4', datetime: '2026-06-21T00:00:00-05:00', home: 'tun', away: 'jpn', venue: 'Estadio BBVA, Monterrey',                   stage: 'Group F', status: 'upcoming' },
+  { id: 'gF5', datetime: '2026-06-25T19:00:00-05:00', home: 'jpn', away: 'swe', venue: 'AT&T Stadium, Dallas',                      stage: 'Group F', status: 'upcoming' },
+  { id: 'gF6', datetime: '2026-06-25T19:00:00-05:00', home: 'tun', away: 'ned', venue: 'Arrowhead Stadium, Kansas City',            stage: 'Group F', status: 'upcoming' },
 
-  //  GROUP F  (Netherlands  Tunisia  Japan  Sweden) 
-  { id: 'gF1', datetime: '2026-06-13T13:00:00-07:00', home: 'ned', away: 'tun', venue: 'Lumen Field, Seattle',                      stage: 'Group F', status: 'upcoming' },
-  { id: 'gF2', datetime: '2026-06-13T16:00:00-07:00', home: 'jpn', away: 'swe', venue: 'Arrowhead Stadium, Kansas City',            stage: 'Group F', status: 'upcoming' },
-  { id: 'gF3', datetime: '2026-06-17T13:00:00-07:00', home: 'ned', away: 'jpn', venue: 'Lumen Field, Seattle',                      stage: 'Group F', status: 'upcoming' },
-  { id: 'gF4', datetime: '2026-06-17T16:00:00-07:00', home: 'swe', away: 'tun', venue: 'Arrowhead Stadium, Kansas City',            stage: 'Group F', status: 'upcoming' },
-  { id: 'gF5', datetime: '2026-06-21T18:00:00-07:00', home: 'ned', away: 'swe', venue: 'Lumen Field, Seattle',                      stage: 'Group F', status: 'upcoming' },
-  { id: 'gF6', datetime: '2026-06-21T18:00:00-07:00', home: 'tun', away: 'jpn', venue: 'Arrowhead Stadium, Kansas City',            stage: 'Group F', status: 'upcoming' },
+  // ─────────────── GROUP G  (Belgium · New Zealand · Egypt · Iran) ───────────────
+  { id: 'gG1', datetime: '2026-06-15T15:00:00-07:00', home: 'bel', away: 'egy', venue: 'Lumen Field, Seattle',                      stage: 'Group G', status: 'upcoming' },
+  { id: 'gG2', datetime: '2026-06-15T21:00:00-07:00', home: 'irn', away: 'nzl', venue: 'SoFi Stadium, Los Angeles',                 stage: 'Group G', status: 'upcoming' },
+  { id: 'gG3', datetime: '2026-06-21T15:00:00-07:00', home: 'bel', away: 'irn', venue: 'SoFi Stadium, Los Angeles',                 stage: 'Group G', status: 'upcoming' },
+  { id: 'gG4', datetime: '2026-06-21T21:00:00-07:00', home: 'nzl', away: 'egy', venue: 'BC Place, Vancouver',                       stage: 'Group G', status: 'upcoming' },
+  { id: 'gG5', datetime: '2026-06-26T23:00:00-04:00', home: 'egy', away: 'irn', venue: 'Lumen Field, Seattle',                      stage: 'Group G', status: 'upcoming' },
+  { id: 'gG6', datetime: '2026-06-26T23:00:00-04:00', home: 'nzl', away: 'bel', venue: 'BC Place, Vancouver',                       stage: 'Group G', status: 'upcoming' },
 
-  //  GROUP G  (Belgium  New Zealand  Egypt  Iran) 
-  { id: 'gG1', datetime: '2026-06-14T13:00:00-04:00', home: 'bel', away: 'nzl', venue: 'Lincoln Financial Field, Philadelphia',     stage: 'Group G', status: 'upcoming' },
-  { id: 'gG2', datetime: '2026-06-14T16:00:00-04:00', home: 'egy', away: 'irn', venue: 'Gillette Stadium, Boston',                  stage: 'Group G', status: 'upcoming' },
-  { id: 'gG3', datetime: '2026-06-18T13:00:00-04:00', home: 'bel', away: 'egy', venue: 'Lincoln Financial Field, Philadelphia',     stage: 'Group G', status: 'upcoming' },
-  { id: 'gG4', datetime: '2026-06-18T16:00:00-04:00', home: 'irn', away: 'nzl', venue: 'Gillette Stadium, Boston',                  stage: 'Group G', status: 'upcoming' },
-  { id: 'gG5', datetime: '2026-06-22T18:00:00-04:00', home: 'bel', away: 'irn', venue: 'Lincoln Financial Field, Philadelphia',     stage: 'Group G', status: 'upcoming' },
-  { id: 'gG6', datetime: '2026-06-22T18:00:00-04:00', home: 'nzl', away: 'egy', venue: 'Gillette Stadium, Boston',                  stage: 'Group G', status: 'upcoming' },
+  // ─────────────── GROUP H  (Spain · Uruguay · Saudi Arabia · Cabo Verde) ───────────────
+  { id: 'gH1', datetime: '2026-06-15T12:00:00-04:00', home: 'esp', away: 'cpv', venue: 'Mercedes-Benz Stadium, Atlanta',            stage: 'Group H', status: 'upcoming' },
+  { id: 'gH2', datetime: '2026-06-15T18:00:00-04:00', home: 'ksa', away: 'uru', venue: 'Hard Rock Stadium, Miami',                  stage: 'Group H', status: 'upcoming' },
+  { id: 'gH3', datetime: '2026-06-21T12:00:00-04:00', home: 'esp', away: 'ksa', venue: 'Mercedes-Benz Stadium, Atlanta',            stage: 'Group H', status: 'upcoming' },
+  { id: 'gH4', datetime: '2026-06-21T18:00:00-04:00', home: 'uru', away: 'cpv', venue: 'Hard Rock Stadium, Miami',                  stage: 'Group H', status: 'upcoming' },
+  { id: 'gH5', datetime: '2026-06-26T20:00:00-05:00', home: 'cpv', away: 'ksa', venue: 'NRG Stadium, Houston',                      stage: 'Group H', status: 'upcoming' },
+  { id: 'gH6', datetime: '2026-06-26T20:00:00-05:00', home: 'uru', away: 'esp', venue: 'Estadio Akron, Guadalajara',                stage: 'Group H', status: 'upcoming' },
 
-  //  GROUP H  (Spain  Uruguay  Saudi Arabia  Cabo Verde) 
-  { id: 'gH1', datetime: '2026-06-14T13:00:00-05:00', home: 'esp', away: 'uru', venue: 'MetLife Stadium, New Jersey',               stage: 'Group H', status: 'upcoming' },
-  { id: 'gH2', datetime: '2026-06-14T16:00:00-05:00', home: 'ksa', away: 'cpv', venue: 'Camping World Stadium, Orlando',            stage: 'Group H', status: 'upcoming' },
-  { id: 'gH3', datetime: '2026-06-18T13:00:00-05:00', home: 'esp', away: 'ksa', venue: 'MetLife Stadium, New Jersey',               stage: 'Group H', status: 'upcoming' },
-  { id: 'gH4', datetime: '2026-06-18T16:00:00-05:00', home: 'uru', away: 'cpv', venue: 'Camping World Stadium, Orlando',            stage: 'Group H', status: 'upcoming' },
-  { id: 'gH5', datetime: '2026-06-22T18:00:00-05:00', home: 'esp', away: 'cpv', venue: 'MetLife Stadium, New Jersey',               stage: 'Group H', status: 'upcoming' },
-  { id: 'gH6', datetime: '2026-06-22T18:00:00-05:00', home: 'uru', away: 'ksa', venue: 'Camping World Stadium, Orlando',            stage: 'Group H', status: 'upcoming' },
+  // ─────────────── GROUP I  (France · Norway · Senegal · Iraq) ───────────────
+  { id: 'gI1', datetime: '2026-06-16T15:00:00-04:00', home: 'fra', away: 'sen', venue: 'MetLife Stadium, New Jersey',               stage: 'Group I', status: 'upcoming' },
+  { id: 'gI2', datetime: '2026-06-16T18:00:00-04:00', home: 'irq', away: 'nor', venue: 'Gillette Stadium, Boston',                  stage: 'Group I', status: 'upcoming' },
+  { id: 'gI3', datetime: '2026-06-22T17:00:00-04:00', home: 'fra', away: 'irq', venue: 'Lincoln Financial Field, Philadelphia',     stage: 'Group I', status: 'upcoming' },
+  { id: 'gI4', datetime: '2026-06-22T20:00:00-04:00', home: 'nor', away: 'sen', venue: 'MetLife Stadium, New Jersey',               stage: 'Group I', status: 'upcoming' },
+  { id: 'gI5', datetime: '2026-06-26T15:00:00-04:00', home: 'nor', away: 'fra', venue: 'Gillette Stadium, Boston',                  stage: 'Group I', status: 'upcoming' },
+  { id: 'gI6', datetime: '2026-06-26T15:00:00-04:00', home: 'sen', away: 'irq', venue: 'BMO Field, Toronto',                        stage: 'Group I', status: 'upcoming' },
 
-  //  GROUP I  (France  Norway  Senegal  Iraq) 
-  { id: 'gI1', datetime: '2026-06-14T13:00:00-06:00', home: 'fra', away: 'nor', venue: 'AT&T Stadium, Dallas',                      stage: 'Group I', status: 'upcoming' },
-  { id: 'gI2', datetime: '2026-06-14T16:00:00-06:00', home: 'sen', away: 'irq', venue: 'NRG Stadium, Houston',                      stage: 'Group I', status: 'upcoming' },
-  { id: 'gI3', datetime: '2026-06-18T13:00:00-06:00', home: 'fra', away: 'sen', venue: 'AT&T Stadium, Dallas',                      stage: 'Group I', status: 'upcoming' },
-  { id: 'gI4', datetime: '2026-06-18T16:00:00-06:00', home: 'nor', away: 'irq', venue: 'NRG Stadium, Houston',                      stage: 'Group I', status: 'upcoming' },
-  { id: 'gI5', datetime: '2026-06-22T18:00:00-06:00', home: 'fra', away: 'irq', venue: 'AT&T Stadium, Dallas',                      stage: 'Group I', status: 'upcoming' },
-  { id: 'gI6', datetime: '2026-06-22T18:00:00-06:00', home: 'nor', away: 'sen', venue: 'NRG Stadium, Houston',                      stage: 'Group I', status: 'upcoming' },
+  // ─────────────── GROUP J  (Argentina · Jordan · Algeria · Austria) ───────────────
+  { id: 'gJ1', datetime: '2026-06-16T21:00:00-04:00', home: 'arg', away: 'alg', venue: 'Arrowhead Stadium, Kansas City',            stage: 'Group J', status: 'upcoming' },
+  { id: 'gJ2', datetime: '2026-06-17T00:00:00-04:00', home: 'aut', away: 'jor', venue: "Levi's Stadium, San Francisco",             stage: 'Group J', status: 'upcoming' },
+  { id: 'gJ3', datetime: '2026-06-22T13:00:00-05:00', home: 'arg', away: 'aut', venue: 'AT&T Stadium, Dallas',                      stage: 'Group J', status: 'upcoming' },
+  { id: 'gJ4', datetime: '2026-06-22T23:00:00-07:00', home: 'jor', away: 'alg', venue: "Levi's Stadium, San Francisco",             stage: 'Group J', status: 'upcoming' },
+  { id: 'gJ5', datetime: '2026-06-27T22:00:00-05:00', home: 'alg', away: 'aut', venue: 'Arrowhead Stadium, Kansas City',            stage: 'Group J', status: 'upcoming' },
+  { id: 'gJ6', datetime: '2026-06-27T22:00:00-05:00', home: 'jor', away: 'arg', venue: 'AT&T Stadium, Dallas',                      stage: 'Group J', status: 'upcoming' },
 
-  //  GROUP J  (Argentina  Jordan  Algeria  Austria) 
-  { id: 'gJ1', datetime: '2026-06-15T13:00:00-04:00', home: 'arg', away: 'jor', venue: 'MetLife Stadium, New Jersey',               stage: 'Group J', status: 'upcoming' },
-  { id: 'gJ2', datetime: '2026-06-15T16:00:00-04:00', home: 'alg', away: 'aut', venue: 'Lincoln Financial Field, Philadelphia',     stage: 'Group J', status: 'upcoming' },
-  { id: 'gJ3', datetime: '2026-06-19T13:00:00-04:00', home: 'arg', away: 'alg', venue: 'MetLife Stadium, New Jersey',               stage: 'Group J', status: 'upcoming' },
-  { id: 'gJ4', datetime: '2026-06-19T16:00:00-04:00', home: 'aut', away: 'jor', venue: 'Lincoln Financial Field, Philadelphia',     stage: 'Group J', status: 'upcoming' },
-  { id: 'gJ5', datetime: '2026-06-23T18:00:00-04:00', home: 'arg', away: 'aut', venue: 'MetLife Stadium, New Jersey',               stage: 'Group J', status: 'upcoming' },
-  { id: 'gJ6', datetime: '2026-06-23T18:00:00-04:00', home: 'jor', away: 'alg', venue: 'Lincoln Financial Field, Philadelphia',     stage: 'Group J', status: 'upcoming' },
+  // ─────────────── GROUP K  (Portugal · Uzbekistan · Colombia · Congo DR) ───────────────
+  { id: 'gK1', datetime: '2026-06-17T13:00:00-04:00', home: 'por', away: 'cod', venue: 'NRG Stadium, Houston',                      stage: 'Group K', status: 'upcoming' },
+  { id: 'gK2', datetime: '2026-06-17T22:00:00-05:00', home: 'uzb', away: 'col', venue: 'Estadio Azteca, Mexico City',               stage: 'Group K', status: 'upcoming' },
+  { id: 'gK3', datetime: '2026-06-23T13:00:00-04:00', home: 'por', away: 'uzb', venue: 'NRG Stadium, Houston',                      stage: 'Group K', status: 'upcoming' },
+  { id: 'gK4', datetime: '2026-06-23T22:00:00-05:00', home: 'col', away: 'cod', venue: 'Estadio Akron, Guadalajara',                stage: 'Group K', status: 'upcoming' },
+  { id: 'gK5', datetime: '2026-06-27T19:30:00-04:00', home: 'col', away: 'por', venue: 'Hard Rock Stadium, Miami',                  stage: 'Group K', status: 'upcoming' },
+  { id: 'gK6', datetime: '2026-06-27T19:30:00-04:00', home: 'cod', away: 'uzb', venue: 'Mercedes-Benz Stadium, Atlanta',            stage: 'Group K', status: 'upcoming' },
 
-  //  GROUP K  (Portugal  Uzbekistan  Colombia  Congo DR) 
-  { id: 'gK1', datetime: '2026-06-15T13:00:00-05:00', home: 'por', away: 'uzb', venue: 'Arrowhead Stadium, Kansas City',            stage: 'Group K', status: 'upcoming' },
-  { id: 'gK2', datetime: '2026-06-15T16:00:00-05:00', home: 'col', away: 'cod', venue: 'NRG Stadium, Houston',                      stage: 'Group K', status: 'upcoming' },
-  { id: 'gK3', datetime: '2026-06-19T13:00:00-05:00', home: 'por', away: 'col', venue: 'Arrowhead Stadium, Kansas City',            stage: 'Group K', status: 'upcoming' },
-  { id: 'gK4', datetime: '2026-06-19T16:00:00-05:00', home: 'uzb', away: 'cod', venue: 'NRG Stadium, Houston',                      stage: 'Group K', status: 'upcoming' },
-  { id: 'gK5', datetime: '2026-06-23T18:00:00-05:00', home: 'por', away: 'cod', venue: 'Arrowhead Stadium, Kansas City',            stage: 'Group K', status: 'upcoming' },
-  { id: 'gK6', datetime: '2026-06-23T18:00:00-05:00', home: 'col', away: 'uzb', venue: 'NRG Stadium, Houston',                      stage: 'Group K', status: 'upcoming' },
+  // ─────────────── GROUP L  (England · Croatia · Ghana · Panama) ───────────────
+  { id: 'gL1', datetime: '2026-06-17T16:00:00-05:00', home: 'eng', away: 'cro', venue: 'AT&T Stadium, Dallas',                      stage: 'Group L', status: 'upcoming' },
+  { id: 'gL2', datetime: '2026-06-17T19:00:00-04:00', home: 'gha', away: 'pan', venue: 'BMO Field, Toronto',                        stage: 'Group L', status: 'upcoming' },
+  { id: 'gL3', datetime: '2026-06-23T16:00:00-04:00', home: 'eng', away: 'gha', venue: 'Gillette Stadium, Boston',                  stage: 'Group L', status: 'upcoming' },
+  { id: 'gL4', datetime: '2026-06-23T19:00:00-04:00', home: 'pan', away: 'cro', venue: 'BMO Field, Toronto',                        stage: 'Group L', status: 'upcoming' },
+  { id: 'gL5', datetime: '2026-06-27T17:00:00-04:00', home: 'pan', away: 'eng', venue: 'MetLife Stadium, New Jersey',               stage: 'Group L', status: 'upcoming' },
+  { id: 'gL6', datetime: '2026-06-27T17:00:00-04:00', home: 'cro', away: 'gha', venue: 'Lincoln Financial Field, Philadelphia',     stage: 'Group L', status: 'upcoming' },
 
-  //  GROUP L  (England  Panama  Croatia  Ghana) 
-  { id: 'gL1', datetime: '2026-06-15T13:00:00-07:00', home: 'eng', away: 'pan', venue: 'Lumen Field, Seattle',                      stage: 'Group L', status: 'upcoming' },
-  { id: 'gL2', datetime: '2026-06-15T16:00:00-07:00', home: 'cro', away: 'gha', venue: 'Empower Field, Denver',                     stage: 'Group L', status: 'upcoming' },
-  { id: 'gL3', datetime: '2026-06-19T13:00:00-07:00', home: 'eng', away: 'cro', venue: 'Lumen Field, Seattle',                      stage: 'Group L', status: 'upcoming' },
-  { id: 'gL4', datetime: '2026-06-19T16:00:00-07:00', home: 'gha', away: 'pan', venue: 'Empower Field, Denver',                     stage: 'Group L', status: 'upcoming' },
-  { id: 'gL5', datetime: '2026-06-23T18:00:00-07:00', home: 'eng', away: 'gha', venue: 'Lumen Field, Seattle',                      stage: 'Group L', status: 'upcoming' },
-  { id: 'gL6', datetime: '2026-06-23T18:00:00-07:00', home: 'pan', away: 'cro', venue: 'Empower Field, Denver',                     stage: 'Group L', status: 'upcoming' },
+  // ─────────────── ROUND OF 32  (Jun 28 – Jul 3) ───────────────
+  { id: 'r32a', datetime: '2026-06-28T12:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'MetLife Stadium, New Jersey',              stage: 'Round of 32', status: 'upcoming' },
+  { id: 'r32b', datetime: '2026-06-28T15:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'SoFi Stadium, Los Angeles',                stage: 'Round of 32', status: 'upcoming' },
+  { id: 'r32c', datetime: '2026-06-28T21:30:00-04:00', home: 'tbd', away: 'tbd', venue: 'SoFi Stadium, Los Angeles',                stage: 'Round of 32', status: 'upcoming' },
+  { id: 'r32d', datetime: '2026-06-29T12:00:00-05:00', home: 'tbd', away: 'tbd', venue: 'AT&T Stadium, Dallas',                     stage: 'Round of 32', status: 'upcoming' },
+  { id: 'r32e', datetime: '2026-06-29T20:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'Estadio Azteca, Mexico City',              stage: 'Round of 32', status: 'upcoming' },
+  { id: 'r32f', datetime: '2026-06-29T22:00:00-05:00', home: 'tbd', away: 'tbd', venue: 'Estadio Azteca, Mexico City',              stage: 'Round of 32', status: 'upcoming' },
+  { id: 'r32g', datetime: '2026-06-30T12:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'Estadio BBVA, Monterrey',                  stage: 'Round of 32', status: 'upcoming' },
+  { id: 'r32h', datetime: '2026-06-30T16:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'MetLife Stadium, New Jersey',              stage: 'Round of 32', status: 'upcoming' },
+  { id: 'r32i', datetime: '2026-06-30T21:30:00-05:00', home: 'tbd', away: 'tbd', venue: 'Estadio BBVA, Monterrey',                  stage: 'Round of 32', status: 'upcoming' },
+  { id: 'r32j', datetime: '2026-07-01T12:00:00-05:00', home: 'tbd', away: 'tbd', venue: 'Arrowhead Stadium, Kansas City',           stage: 'Round of 32', status: 'upcoming' },
+  { id: 'r32k', datetime: '2026-07-01T16:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'Lincoln Financial Field, Philadelphia',    stage: 'Round of 32', status: 'upcoming' },
+  { id: 'r32l', datetime: '2026-07-02T12:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'BMO Field, Toronto',                       stage: 'Round of 32', status: 'upcoming' },
+  { id: 'r32m', datetime: '2026-07-02T16:00:00-07:00', home: 'tbd', away: 'tbd', venue: 'BC Place, Vancouver',                      stage: 'Round of 32', status: 'upcoming' },
+  { id: 'r32n', datetime: '2026-07-03T12:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'Hard Rock Stadium, Miami',                 stage: 'Round of 32', status: 'upcoming' },
+  { id: 'r32o', datetime: '2026-07-03T21:30:00-05:00', home: 'tbd', away: 'tbd', venue: 'Arrowhead Stadium, Kansas City',           stage: 'Round of 32', status: 'upcoming' },
+  { id: 'r32p', datetime: '2026-07-03T21:00:00-05:00', home: 'tbd', away: 'tbd', venue: 'AT&T Stadium, Dallas',                     stage: 'Round of 32', status: 'upcoming' },
 
-  //  ROUND OF 32 
-  { id: 'r32a', datetime: '2026-06-27T16:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'MetLife Stadium, New Jersey',              stage: 'Round of 32', status: 'upcoming' },
-  { id: 'r32b', datetime: '2026-06-27T20:00:00-06:00', home: 'tbd', away: 'tbd', venue: 'AT&T Stadium, Dallas',                     stage: 'Round of 32', status: 'upcoming' },
-  { id: 'r32c', datetime: '2026-06-28T16:00:00-07:00', home: 'tbd', away: 'tbd', venue: 'SoFi Stadium, Los Angeles',                stage: 'Round of 32', status: 'upcoming' },
-  { id: 'r32d', datetime: '2026-06-28T20:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'Hard Rock Stadium, Miami',                 stage: 'Round of 32', status: 'upcoming' },
-  { id: 'r32e', datetime: '2026-06-29T16:00:00-06:00', home: 'tbd', away: 'tbd', venue: 'NRG Stadium, Houston',                     stage: 'Round of 32', status: 'upcoming' },
-  { id: 'r32f', datetime: '2026-06-29T20:00:00-07:00', home: 'tbd', away: 'tbd', venue: "Levi's Stadium, San Francisco",            stage: 'Round of 32', status: 'upcoming' },
-  { id: 'r32g', datetime: '2026-06-30T16:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'Lincoln Financial Field, Philadelphia',    stage: 'Round of 32', status: 'upcoming' },
-  { id: 'r32h', datetime: '2026-06-30T20:00:00-05:00', home: 'tbd', away: 'tbd', venue: 'Arrowhead Stadium, Kansas City',           stage: 'Round of 32', status: 'upcoming' },
-  { id: 'r32i', datetime: '2026-07-01T16:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'Gillette Stadium, Boston',                 stage: 'Round of 32', status: 'upcoming' },
-  { id: 'r32j', datetime: '2026-07-01T20:00:00-07:00', home: 'tbd', away: 'tbd', venue: 'Lumen Field, Seattle',                     stage: 'Round of 32', status: 'upcoming' },
-  { id: 'r32k', datetime: '2026-07-02T16:00:00-06:00', home: 'tbd', away: 'tbd', venue: 'Estadio Akron, Guadalajara',               stage: 'Round of 32', status: 'upcoming' },
-  { id: 'r32l', datetime: '2026-07-02T20:00:00-06:00', home: 'tbd', away: 'tbd', venue: 'Estadio Azteca, Mexico City',              stage: 'Round of 32', status: 'upcoming' },
-  { id: 'r32m', datetime: '2026-07-03T16:00:00-05:00', home: 'tbd', away: 'tbd', venue: 'Mercedes-Benz Stadium, Atlanta',           stage: 'Round of 32', status: 'upcoming' },
-  { id: 'r32n', datetime: '2026-07-03T20:00:00-07:00', home: 'tbd', away: 'tbd', venue: 'Empower Field, Denver',                    stage: 'Round of 32', status: 'upcoming' },
-  { id: 'r32o', datetime: '2026-07-04T16:00:00-05:00', home: 'tbd', away: 'tbd', venue: 'Camping World Stadium, Orlando',           stage: 'Round of 32', status: 'upcoming' },
-  { id: 'r32p', datetime: '2026-07-04T20:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'BMO Field, Toronto',                       stage: 'Round of 32', status: 'upcoming' },
+  // ─────────────── ROUND OF 16  (Jul 4–7) ───────────────
+  { id: 'r16a', datetime: '2026-07-04T13:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'NRG Stadium, Houston',                     stage: 'Round of 16', status: 'upcoming' },
+  { id: 'r16b', datetime: '2026-07-04T17:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'Lincoln Financial Field, Philadelphia',    stage: 'Round of 16', status: 'upcoming' },
+  { id: 'r16c', datetime: '2026-07-05T16:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'MetLife Stadium, New Jersey',              stage: 'Round of 16', status: 'upcoming' },
+  { id: 'r16d', datetime: '2026-07-05T20:00:00-05:00', home: 'tbd', away: 'tbd', venue: 'Estadio Azteca, Mexico City',              stage: 'Round of 16', status: 'upcoming' },
+  { id: 'r16e', datetime: '2026-07-06T15:00:00-05:00', home: 'tbd', away: 'tbd', venue: 'AT&T Stadium, Dallas',                     stage: 'Round of 16', status: 'upcoming' },
+  { id: 'r16f', datetime: '2026-07-06T17:00:00-07:00', home: 'tbd', away: 'tbd', venue: 'Lumen Field, Seattle',                     stage: 'Round of 16', status: 'upcoming' },
+  { id: 'r16g', datetime: '2026-07-07T12:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'Mercedes-Benz Stadium, Atlanta',           stage: 'Round of 16', status: 'upcoming' },
+  { id: 'r16h', datetime: '2026-07-07T16:00:00-07:00', home: 'tbd', away: 'tbd', venue: 'BC Place, Vancouver',                      stage: 'Round of 16', status: 'upcoming' },
 
-  //  ROUND OF 16 
-  { id: 'r16a', datetime: '2026-07-08T16:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'MetLife Stadium, New Jersey',              stage: 'Round of 16', status: 'upcoming' },
-  { id: 'r16b', datetime: '2026-07-08T20:00:00-06:00', home: 'tbd', away: 'tbd', venue: 'AT&T Stadium, Dallas',                     stage: 'Round of 16', status: 'upcoming' },
-  { id: 'r16c', datetime: '2026-07-09T16:00:00-07:00', home: 'tbd', away: 'tbd', venue: 'SoFi Stadium, Los Angeles',                stage: 'Round of 16', status: 'upcoming' },
-  { id: 'r16d', datetime: '2026-07-09T20:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'Hard Rock Stadium, Miami',                 stage: 'Round of 16', status: 'upcoming' },
-  { id: 'r16e', datetime: '2026-07-10T16:00:00-06:00', home: 'tbd', away: 'tbd', venue: 'NRG Stadium, Houston',                     stage: 'Round of 16', status: 'upcoming' },
-  { id: 'r16f', datetime: '2026-07-10T20:00:00-07:00', home: 'tbd', away: 'tbd', venue: "Levi's Stadium, San Francisco",            stage: 'Round of 16', status: 'upcoming' },
-  { id: 'r16g', datetime: '2026-07-11T16:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'BC Place, Vancouver',                      stage: 'Round of 16', status: 'upcoming' },
-  { id: 'r16h', datetime: '2026-07-11T20:00:00-05:00', home: 'tbd', away: 'tbd', venue: 'Arrowhead Stadium, Kansas City',           stage: 'Round of 16', status: 'upcoming' },
+  // ─────────────── QUARTER-FINALS  (Jul 9–11) ───────────────
+  { id: 'qf1',  datetime: '2026-07-09T16:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'Gillette Stadium, Boston',                 stage: 'Quarter-final', status: 'upcoming' },
+  { id: 'qf2',  datetime: '2026-07-10T15:00:00-07:00', home: 'tbd', away: 'tbd', venue: 'SoFi Stadium, Los Angeles',                stage: 'Quarter-final', status: 'upcoming' },
+  { id: 'qf3',  datetime: '2026-07-11T17:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'Hard Rock Stadium, Miami',                 stage: 'Quarter-final', status: 'upcoming' },
+  { id: 'qf4',  datetime: '2026-07-11T21:00:00-05:00', home: 'tbd', away: 'tbd', venue: 'Arrowhead Stadium, Kansas City',           stage: 'Quarter-final', status: 'upcoming' },
 
-  //  QUARTER-FINALS 
-  { id: 'qf1',  datetime: '2026-07-15T20:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'MetLife Stadium, New Jersey',              stage: 'Quarter-final', status: 'upcoming' },
-  { id: 'qf2',  datetime: '2026-07-16T20:00:00-06:00', home: 'tbd', away: 'tbd', venue: 'AT&T Stadium, Dallas',                     stage: 'Quarter-final', status: 'upcoming' },
-  { id: 'qf3',  datetime: '2026-07-17T20:00:00-07:00', home: 'tbd', away: 'tbd', venue: 'SoFi Stadium, Los Angeles',                stage: 'Quarter-final', status: 'upcoming' },
-  { id: 'qf4',  datetime: '2026-07-18T20:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'Hard Rock Stadium, Miami',                 stage: 'Quarter-final', status: 'upcoming' },
+  // ─────────────── SEMI-FINALS  (Jul 14–15) ───────────────
+  { id: 'sf1',  datetime: '2026-07-14T15:00:00-05:00', home: 'tbd', away: 'tbd', venue: 'AT&T Stadium, Dallas',                     stage: 'Semi-final', status: 'upcoming' },
+  { id: 'sf2',  datetime: '2026-07-15T15:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'Mercedes-Benz Stadium, Atlanta',           stage: 'Semi-final', status: 'upcoming' },
 
-  //  SEMI-FINALS 
-  { id: 'sf1',  datetime: '2026-07-22T20:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'MetLife Stadium, New Jersey',              stage: 'Semi-final', status: 'upcoming' },
-  { id: 'sf2',  datetime: '2026-07-23T20:00:00-06:00', home: 'tbd', away: 'tbd', venue: 'AT&T Stadium, Dallas',                     stage: 'Semi-final', status: 'upcoming' },
-
-  //  THIRD PLACE & FINAL 
-  { id: 'tp',   datetime: '2026-07-25T16:00:00-06:00', home: 'tbd', away: 'tbd', venue: 'AT&T Stadium, Dallas',                     stage: 'Third Place', status: 'upcoming' },
-  { id: 'fin',  datetime: '2026-07-19T18:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'MetLife Stadium, New Jersey',              stage: 'Final', status: 'upcoming' },
+  // ─────────────── THIRD PLACE & FINAL ───────────────
+  { id: 'tp',   datetime: '2026-07-18T17:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'Hard Rock Stadium, Miami',                 stage: 'Third Place', status: 'upcoming' },
+  { id: 'fin',  datetime: '2026-07-19T15:00:00-04:00', home: 'tbd', away: 'tbd', venue: 'MetLife Stadium, New Jersey',              stage: 'Final', status: 'upcoming' },
 ];
 
 const ALL_GROUPS = ['A','B','C','D','E','F','G','H','I','J','K','L'];
@@ -345,7 +347,7 @@ function getGroupPrediction(group) {
     .map((team, index) => ({ team, predictedPoints: 0, qualified: index < 2 }));
 }
 
-//  Navbar 
+// ─── Navbar ─────────────────────────────────────────────────────────────────
 function Navbar({ activeSection }) {
   return (
     <nav className="navbar glass">
@@ -371,7 +373,7 @@ function Navbar({ activeSection }) {
   );
 }
 
-//  Hero 
+// ─── Hero ────────────────────────────────────────────────────────────────────
 function Hero() {
   const cd = useCountdown(WORLD_CUP_START);
   return (
@@ -409,62 +411,19 @@ function Hero() {
   );
 }
 
-//  StarButton 
-
 const FLAG_ASSET_CODES = {
-  ALG: 'dz',
-  ARG: 'ar',
-  AUS: 'au',
-  AUT: 'at',
-  BEL: 'be',
-  BIH: 'ba',
-  BRA: 'br',
-  CPV: 'cv',
-  CAN: 'ca',
-  COL: 'co',
-  COD: 'cd',
-  CIV: 'ci',
-  CRO: 'hr',
-  CUR: 'cw',
-  CZE: 'cz',
-  ECU: 'ec',
-  EGY: 'eg',
-  ENG: 'gb-eng',
-  FRA: 'fr',
-  GER: 'de',
-  GHA: 'gh',
-  HTI: 'ht',
-  IRN: 'ir',
-  IRQ: 'iq',
-  JPN: 'jp',
-  JOR: 'jo',
-  KOR: 'kr',
-  MAR: 'ma',
-  MEX: 'mx',
-  NZL: 'nz',
-  NED: 'nl',
-  NOR: 'no',
-  PAN: 'pa',
-  PRY: 'py',
-  POR: 'pt',
-  QAT: 'qa',
-  KSA: 'sa',
-  SCO: 'gb-sct',
-  SEN: 'sn',
-  ZAF: 'za',
-  ESP: 'es',
-  SWE: 'se',
-  SUI: 'ch',
-  TUN: 'tn',
-  TUR: 'tr',
-  URU: 'uy',
-  USA: 'us',
-  UZB: 'uz',
+  ALG: 'dz', ARG: 'ar', AUS: 'au', AUT: 'at', BEL: 'be', BIH: 'ba',
+  BRA: 'br', CPV: 'cv', CAN: 'ca', COL: 'co', COD: 'cd', CIV: 'ci',
+  CRO: 'hr', CUR: 'cw', CZE: 'cz', ECU: 'ec', EGY: 'eg', ENG: 'gb-eng',
+  FRA: 'fr', GER: 'de', GHA: 'gh', HTI: 'ht', IRN: 'ir', IRQ: 'iq',
+  JPN: 'jp', JOR: 'jo', KOR: 'kr', MAR: 'ma', MEX: 'mx', NZL: 'nz',
+  NED: 'nl', NOR: 'no', PAN: 'pa', PRY: 'py', POR: 'pt', QAT: 'qa',
+  KSA: 'sa', SCO: 'gb-sct', SEN: 'sn', ZAF: 'za', ESP: 'es', SWE: 'se',
+  SUI: 'ch', TUN: 'tn', TUR: 'tr', URU: 'uy', USA: 'us', UZB: 'uz',
 };
 
 function FlagEmoji({ team, className = '' }) {
   const flagCode = FLAG_ASSET_CODES[team.code];
-
   return (
     <img
       className={className}
@@ -493,12 +452,11 @@ function StarButton({ active, onClick, label }) {
   );
 }
 
-//  MatchCard 
+// ─── MatchCard ───────────────────────────────────────────────────────────────
 function MatchCard({ match, favorites, onToggleFavorite, style, now }) {
   const home = TEAMS[match.home];
   const away = TEAMS[match.away];
 
-  // Handle TBD knockout matches gracefully
   if (!home || !away) {
     return (
       <article className="match-card glass match-card--tbd" style={style}>
@@ -518,6 +476,13 @@ function MatchCard({ match, favorites, onToggleFavorite, style, now }) {
               <circle cx="12" cy="10" r="2.5" stroke="currentColor" strokeWidth="1.5" />
             </svg>
             <span>{match.venue}</span>
+          </div>
+          <div className="match-card__meta-item">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" />
+              <path d="M12 7v5l3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+            <span>{formatISTTime(match.datetime)}</span>
           </div>
         </div>
       </article>
@@ -589,31 +554,19 @@ function MatchCard({ match, favorites, onToggleFavorite, style, now }) {
           <div className="live-tracker__score">{liveDetails.scoreline}</div>
           <div className="live-tracker__minute">{liveDetails.minute}</div>
           <div className="live-tracker__grid">
-            <div>
-              <span>Goals</span>
-              <strong>{liveDetails.goals.length}</strong>
-            </div>
-            <div>
-              <span>Yellow</span>
-              <strong>{liveDetails.yellowCards.length}</strong>
-            </div>
-            <div>
-              <span>Red</span>
-              <strong>{liveDetails.redCards.length}</strong>
-            </div>
-            <div>
-              <span>Events</span>
-              <strong>{liveDetails.events.length}</strong>
-            </div>
+            <div><span>Goals</span><strong>{liveDetails.goals.length}</strong></div>
+            <div><span>Yellow</span><strong>{liveDetails.yellowCards.length}</strong></div>
+            <div><span>Red</span><strong>{liveDetails.redCards.length}</strong></div>
+            <div><span>Events</span><strong>{liveDetails.events.length}</strong></div>
           </div>
-          <p className="live-tracker__note">Live event feed is ready. Stats are all zero for now.</p>
+          <p className="live-tracker__note">Live event feed ready. Stats will update during matches.</p>
         </div>
       )}
     </article>
   );
 }
 
-//  MatchSection (with pagination) 
+// ─── MatchSection ─────────────────────────────────────────────────────────────
 function MatchSection({ id, title, subtitle, matches, favorites, onToggleFavorite, now,
                         hasMore, onShowMore, totalCount, showMoreLabel = 'Load 20 more fixtures',
                         gridClassName = '', sectionClassName = '' }) {
@@ -660,20 +613,14 @@ function MatchSection({ id, title, subtitle, matches, favorites, onToggleFavorit
   );
 }
 
-//  GroupTable 
+// ─── GroupTable ───────────────────────────────────────────────────────────────
 function GroupTable({ group }) {
   const standings = Object.values(TEAMS)
     .filter(t => t.group === group)
     .map(team => ({
       team,
-      played: 0,
-      won: 0,
-      drawn: 0,
-      lost: 0,
-      goalsFor: 0,
-      goalsAgainst: 0,
-      goalDifference: 0,
-      points: 0,
+      played: 0, won: 0, drawn: 0, lost: 0,
+      goalsFor: 0, goalsAgainst: 0, goalDifference: 0, points: 0,
     }))
     .sort((a, b) =>
       b.points - a.points ||
@@ -688,16 +635,8 @@ function GroupTable({ group }) {
       <table>
         <thead>
           <tr>
-            <th>Pos</th>
-            <th>Team</th>
-            <th>MP</th>
-            <th>W</th>
-            <th>D</th>
-            <th>L</th>
-            <th>GF</th>
-            <th>GA</th>
-            <th>GD</th>
-            <th>Pts</th>
+            <th>Pos</th><th>Team</th><th>MP</th><th>W</th><th>D</th>
+            <th>L</th><th>GF</th><th>GA</th><th>GD</th><th>Pts</th>
           </tr>
         </thead>
         <tbody>
@@ -705,14 +644,8 @@ function GroupTable({ group }) {
             <tr key={team.code}>
               <td>{index + 1}</td>
               <td><FlagEmoji team={team} className="inline-flag" /> {team.name}</td>
-              <td>{played}</td>
-              <td>{won}</td>
-              <td>{drawn}</td>
-              <td>{lost}</td>
-              <td>{goalsFor}</td>
-              <td>{goalsAgainst}</td>
-              <td>{goalDifference}</td>
-              <td>{points}</td>
+              <td>{played}</td><td>{won}</td><td>{drawn}</td><td>{lost}</td>
+              <td>{goalsFor}</td><td>{goalsAgainst}</td><td>{goalDifference}</td><td>{points}</td>
             </tr>
           ))}
         </tbody>
@@ -721,7 +654,7 @@ function GroupTable({ group }) {
   );
 }
 
-//  StandingsSection (group-wise with Show All toggle) 
+// ─── StandingsSection ─────────────────────────────────────────────────────────
 function StandingsSection() {
   const [activeGroup, setActiveGroup] = useState('A');
   const [showAll, setShowAll] = useState(false);
@@ -733,11 +666,7 @@ function StandingsSection() {
           <h2 className="section__title">Group Standings</h2>
           <p className="section__subtitle">Official FIFA World Cup 2026 Groups</p>
         </div>
-        <button
-          type="button"
-          className="show-more-btn"
-          onClick={() => setShowAll(v => !v)}
-        >
+        <button type="button" className="show-more-btn" onClick={() => setShowAll(v => !v)}>
           {showAll ? 'Show one group' : 'Show all groups'}
         </button>
       </div>
@@ -745,11 +674,7 @@ function StandingsSection() {
       {!showAll && (
         <div className="teams-filter" style={{ marginBottom: '1.5rem' }}>
           {ALL_GROUPS.map(g => (
-            <button
-              key={g}
-              className={`group-pill ${activeGroup === g ? 'active' : ''}`}
-              onClick={() => setActiveGroup(g)}
-            >
+            <button key={g} className={`group-pill ${activeGroup === g ? 'active' : ''}`} onClick={() => setActiveGroup(g)}>
               Group {g}
             </button>
           ))}
@@ -758,9 +683,7 @@ function StandingsSection() {
 
       {showAll ? (
         <div className="groups-grid">
-          {ALL_GROUPS.map(group => (
-            <GroupTable key={group} group={group} />
-          ))}
+          {ALL_GROUPS.map(group => <GroupTable key={group} group={group} />)}
         </div>
       ) : (
         <GroupTable group={activeGroup} />
@@ -773,13 +696,12 @@ function TeamDetailModal({ teamKey, onClose }) {
   const team = TEAMS[teamKey];
   const detail = TEAM_DETAILS[teamKey];
   const fixtures = getTeamFixtures(teamKey);
-
   if (!team) return null;
 
   return (
     <div className="modal-backdrop" role="presentation" onClick={onClose}>
       <div className="team-detail glass" role="dialog" aria-modal="true" aria-label={`${team.name} details`} onClick={(e) => e.stopPropagation()}>
-        <button type="button" className="modal-close" onClick={onClose} aria-label="Close team details">x</button>
+        <button type="button" className="modal-close" onClick={onClose} aria-label="Close team details">×</button>
         <div className="team-detail__header">
           <FlagEmoji team={team} className="team-detail__flag" />
           <div>
@@ -812,7 +734,7 @@ function TeamDetailModal({ teamKey, onClose }) {
   );
 }
 
-//  TeamsSection 
+// ─── TeamsSection ─────────────────────────────────────────────────────────────
 function TeamsSection({ favorites, onToggleFavorite, now }) {
   const [filter, setFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
@@ -836,28 +758,19 @@ function TeamsSection({ favorites, onToggleFavorite, now }) {
       <div className="section__header">
         <div>
           <h2 className="section__title">Teams</h2>
-          <p className="section__subtitle">All 48 competing nations  star your favorites</p>
+          <p className="section__subtitle">All 48 competing nations — star your favorites</p>
         </div>
         <span className="section__count">{teams.length} teams</span>
       </div>
 
       <div className="search-box glass">
-        <input
-          type="text"
-          placeholder="Search teams..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="search-input"
-        />
+        <input type="text" placeholder="Search teams..." value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)} className="search-input" />
       </div>
 
       <div className="teams-filter">
         {groups.map((group) => (
-          <button
-            key={group}
-            className={`group-pill ${filter === group ? 'active' : ''}`}
-            onClick={() => setFilter(group)}
-          >
+          <button key={group} className={`group-pill ${filter === group ? 'active' : ''}`} onClick={() => setFilter(group)}>
             {group === 'all' ? 'All Teams' : `Group ${group}`}
           </button>
         ))}
@@ -872,23 +785,19 @@ function TeamsSection({ favorites, onToggleFavorite, now }) {
               onClick={() => setSelectedTeamKey(Object.keys(TEAMS).find(key => TEAMS[key].code === team.code))}
               aria-label={`Open ${team.name} details`}
             >
-            <div className="team-card__flag-box">
-              <FlagEmoji team={team} className="team-card__flag" />
-            </div>
-            <div className="team-card__info">
-              <div className="team-card__name">
-                {team.name}
-                {team.host && <span className="team-card__host-badge">HOST</span>}
+              <div className="team-card__flag-box">
+                <FlagEmoji team={team} className="team-card__flag" />
               </div>
-              <div className="team-card__meta">Group {team.group} | FIFA Rank #{team.ranking}</div>
-              <div className="team-card__stats">{team.participations} WC Appearances</div>
-            </div>
+              <div className="team-card__info">
+                <div className="team-card__name">
+                  {team.name}
+                  {team.host && <span className="team-card__host-badge">HOST</span>}
+                </div>
+                <div className="team-card__meta">Group {team.group} | FIFA Rank #{team.ranking}</div>
+                <div className="team-card__stats">{team.participations} WC Appearances</div>
+              </div>
             </button>
-            <StarButton
-              active={favorites.has(team.code)}
-              onClick={() => onToggleFavorite(team.code)}
-              label={team.name}
-            />
+            <StarButton active={favorites.has(team.code)} onClick={() => onToggleFavorite(team.code)} label={team.name} />
           </div>
         ))}
       </div>
@@ -898,7 +807,7 @@ function TeamsSection({ favorites, onToggleFavorite, now }) {
           <MatchSection
             id={`group-${filter.toLowerCase()}-matches`}
             title={`Group ${filter} Matches`}
-            subtitle={`All Group ${filter} fixtures in chronological order`}
+            subtitle={`All Group ${filter} fixtures in chronological order (IST)`}
             matches={groupMatches}
             favorites={favorites}
             onToggleFavorite={onToggleFavorite}
@@ -908,16 +817,13 @@ function TeamsSection({ favorites, onToggleFavorite, now }) {
       )}
 
       {selectedTeamKey && (
-        <TeamDetailModal
-          teamKey={selectedTeamKey}
-          onClose={() => setSelectedTeamKey(null)}
-        />
+        <TeamDetailModal teamKey={selectedTeamKey} onClose={() => setSelectedTeamKey(null)} />
       )}
     </section>
   );
 }
 
-//  FavoritesSection 
+// ─── FavoritesSection ─────────────────────────────────────────────────────────
 function FavoritesSection({ favorites, onToggleFavorite, now }) {
   const favoriteTeams = Object.values(TEAMS).filter(t => favorites.has(t.code));
   const favoriteMatches = sortMatchesByKickoff(MATCHES.filter(m => {
@@ -946,15 +852,13 @@ function FavoritesSection({ favorites, onToggleFavorite, now }) {
             {favoriteTeams.map(team => (
               <span key={team.code} className="favorites-chip">
                 <FlagEmoji team={team} className="inline-flag" /> {team.name}
-                <button type="button" onClick={() => onToggleFavorite(team.code)} aria-label={`Remove ${team.name}`}>x</button>
+                <button type="button" onClick={() => onToggleFavorite(team.code)} aria-label={`Remove ${team.name}`}>×</button>
               </span>
             ))}
           </div>
           <div className="section__grid">
             {favoriteMatches.length === 0 ? (
-              <div className="section__empty glass">
-                <p>No upcoming fixtures for your favorite teams.</p>
-              </div>
+              <div className="section__empty glass"><p>No upcoming fixtures for your favorite teams.</p></div>
             ) : (
               favoriteMatches.map(match => (
                 <MatchCard key={match.id} match={match} favorites={favorites} onToggleFavorite={onToggleFavorite} now={now} />
@@ -969,13 +873,12 @@ function FavoritesSection({ favorites, onToggleFavorite, now }) {
 
 function LiveTrackerSection({ favorites, onToggleFavorite, now }) {
   const liveMatches = MATCHES.filter(match => getMatchStatus(match.datetime, now) === 'live');
-
   return (
     <section id="live-tracker" className="section">
       <div className="section__header">
         <div>
           <h2 className="section__title">Live Match Tracker</h2>
-          <p className="section__subtitle">Live score, goals, cards, and match events. Stats are all zero for now.</p>
+          <p className="section__subtitle">Live score, goals, cards, and match events.</p>
         </div>
         <span className="section__count">{liveMatches.length} live</span>
       </div>
@@ -1011,15 +914,8 @@ function StadiumExplorer() {
           const mapQuery = encodeURIComponent(`${stadium.name} ${stadium.location}`);
           return (
             <article key={stadium.name} className="stadium-card glass">
-              <img
-                src={stadium.photo}
-                alt={`${stadium.name} stadium`}
-                loading="lazy"
-                decoding="async"
-                onError={(event) => {
-                  event.currentTarget.src = stadiumFallback;
-                }}
-              />
+              <img src={stadium.photo} alt={`${stadium.name} stadium`} loading="lazy" decoding="async"
+                onError={(event) => { event.currentTarget.src = stadiumFallback; }} />
               <div className="stadium-card__body">
                 <h3>{stadium.name}</h3>
                 <dl>
@@ -1027,11 +923,7 @@ function StadiumExplorer() {
                   <div><dt>Location</dt><dd>{stadium.location}</dd></div>
                   <div><dt>Matches Hosted</dt><dd>{hosted}</dd></div>
                 </dl>
-                <iframe
-                  title={`${stadium.name} map`}
-                  src={`https://www.google.com/maps?q=${mapQuery}&output=embed`}
-                  loading="lazy"
-                />
+                <iframe title={`${stadium.name} map`} src={`https://www.google.com/maps?q=${mapQuery}&output=embed`} loading="lazy" />
               </div>
             </article>
           );
@@ -1067,12 +959,12 @@ function GlobalSearchSection() {
         type: 'Match',
         key: match.id,
         title: `${TEAMS[match.home]?.name || 'TBD'} vs ${TEAMS[match.away]?.name || 'TBD'}`,
-        detail: `${match.stage} | ${formatISTDate(match.datetime)}`,
+        detail: `${match.stage} | ${formatISTDate(match.datetime)} | ${formatISTTime(match.datetime)}`,
       }));
 
     const players = PLAYER_INDEX
       .filter(player => player.toLowerCase().includes(normalizedQuery))
-      .map(player => ({ type: 'Player', key: player, title: player, detail: 'Player profile placeholder | stats zero for now' }));
+      .map(player => ({ type: 'Player', key: player, title: player, detail: 'Player profile placeholder' }));
 
     return [...teams, ...players, ...stadiums, ...matches];
   }, [normalizedQuery]);
@@ -1087,13 +979,8 @@ function GlobalSearchSection() {
         <span className="section__count">{results.length} result{results.length !== 1 ? 's' : ''}</span>
       </div>
       <div className="search-box glass search-box--wide">
-        <input
-          type="text"
-          placeholder="Search teams, players, stadiums, matches..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          className="search-input"
-        />
+        <input type="text" placeholder="Search teams, players, stadiums, matches..."
+          value={query} onChange={(e) => setQuery(e.target.value)} className="search-input" />
       </div>
       <div className="search-results">
         {normalizedQuery && results.length === 0 && <div className="section__empty glass"><p>No results found.</p></div>}
@@ -1115,15 +1002,15 @@ function TournamentStatsSection() {
       <div className="section__header">
         <div>
           <h2 className="section__title">Tournament Stats</h2>
-          <p className="section__subtitle">Note: stats are all zero for now.</p>
+          <p className="section__subtitle">Live stats will update once the tournament begins.</p>
         </div>
       </div>
       <div className="stats-grid">
-        <div className="stat-card glass"><span>GOAL</span><p>Total Goals</p><strong>{TOURNAMENT_STATS.totalGoals}</strong></div>
-        <div className="stat-card glass"><span>CS</span><p>Clean Sheets</p><strong>{TOURNAMENT_STATS.cleanSheets}</strong></div>
-        <div className="stat-card glass"><span>YC</span><p>Yellow Cards</p><strong>{TOURNAMENT_STATS.yellowCards}</strong></div>
-        <div className="stat-card glass"><span>RC</span><p>Red Cards</p><strong>{TOURNAMENT_STATS.redCards}</strong></div>
-        <div className="stat-card glass"><span>TOP</span><p>Top Scorer</p><strong>{TOURNAMENT_STATS.topScorer}</strong></div>
+        <div className="stat-card glass"><span>⚽</span><p>Total Goals</p><strong>{TOURNAMENT_STATS.totalGoals}</strong></div>
+        <div className="stat-card glass"><span>🧤</span><p>Clean Sheets</p><strong>{TOURNAMENT_STATS.cleanSheets}</strong></div>
+        <div className="stat-card glass"><span>🟨</span><p>Yellow Cards</p><strong>{TOURNAMENT_STATS.yellowCards}</strong></div>
+        <div className="stat-card glass"><span>🟥</span><p>Red Cards</p><strong>{TOURNAMENT_STATS.redCards}</strong></div>
+        <div className="stat-card glass"><span>🏅</span><p>Top Scorer</p><strong>{TOURNAMENT_STATS.topScorer}</strong></div>
       </div>
       <div className="leaderboard-grid">
         <Leaderboard title="Top Scorers" rows={TOP_SCORERS} emptyText="No goals yet" />
@@ -1140,9 +1027,7 @@ function Leaderboard({ title, rows, emptyText }) {
       {rows.length === 0 ? (
         <p>{emptyText}</p>
       ) : (
-        <ol>
-          {rows.map(row => <li key={row.name}>{row.name} - {row.value}</li>)}
-        </ol>
+        <ol>{rows.map(row => <li key={row.name}>{row.name} - {row.value}</li>)}</ol>
       )}
     </article>
   );
@@ -1157,17 +1042,14 @@ function GroupPredictionSection() {
       <div className="section__header">
         <div>
           <h2 className="section__title">Group Qualification Predictor</h2>
-          <p className="section__subtitle">Before the tournament starts. All projected points are zero for now.</p>
+          <p className="section__subtitle">Predicted by FIFA ranking. Points will update live once the tournament begins.</p>
         </div>
       </div>
       <div className="teams-filter">
         {ALL_GROUPS.map(group => (
-          <button
-            type="button"
-            key={group}
+          <button type="button" key={group}
             className={`group-pill ${activeGroup === group ? 'active' : ''}`}
-            onClick={() => setActiveGroup(group)}
-          >
+            onClick={() => setActiveGroup(group)}>
             Group {group}
           </button>
         ))}
@@ -1179,7 +1061,7 @@ function GroupPredictionSection() {
             <li key={row.team.code}>
               <span><FlagEmoji team={row.team} className="inline-flag" /> {row.team.name}</span>
               <strong>{row.predictedPoints} pts</strong>
-              {row.qualified && <em>Qualified</em>}
+              {row.qualified && <em>Projected Top 2</em>}
             </li>
           ))}
         </ol>
@@ -1188,7 +1070,7 @@ function GroupPredictionSection() {
   );
 }
 
-//  App 
+// ─── App ─────────────────────────────────────────────────────────────────────
 export default function App() {
   const [favorites, setFavorites] = useState(loadFavorites);
   const [now, setNow] = useState(() => new Date());
@@ -1223,42 +1105,15 @@ export default function App() {
 
   const hasMoreUpcoming = upcomingVisible < allUpcomingMatches.length;
 
-  const roundOf32Matches = useMemo(
-    () => sortMatchesByKickoff(MATCHES.filter(m => m.stage === 'Round of 32')),
-    []
-  );
+  const roundOf32Matches  = useMemo(() => sortMatchesByKickoff(MATCHES.filter(m => m.stage === 'Round of 32')), []);
+  const roundOf16Matches  = useMemo(() => sortMatchesByKickoff(MATCHES.filter(m => m.stage === 'Round of 16')), []);
+  const quarterFinalMatches = useMemo(() => sortMatchesByKickoff(MATCHES.filter(m => m.stage === 'Quarter-final')), []);
+  const semiFinalMatches  = useMemo(() => sortMatchesByKickoff(MATCHES.filter(m => m.stage === 'Semi-final')), []);
+  const finalMatches      = useMemo(() => sortMatchesByKickoff(MATCHES.filter(m => m.stage === 'Final')), []);
 
-  const roundOf16Matches = useMemo(
-    () => sortMatchesByKickoff(MATCHES.filter(m => m.stage === 'Round of 16')),
-    []
-  );
-
-  const quarterFinalMatches = useMemo(
-    () => sortMatchesByKickoff(MATCHES.filter(m => m.stage === 'Quarter-final')),
-    []
-  );
-
-  const semiFinalMatches = useMemo(
-    () => sortMatchesByKickoff(MATCHES.filter(m => m.stage === 'Semi-final')),
-    []
-  );
-
-  const finalMatches = useMemo(
-    () => sortMatchesByKickoff(MATCHES.filter(m => m.stage === 'Final')),
-    []
-  );
-
-  const displayedRoundOf32Matches = expandedKnockouts.roundOf32
-    ? roundOf32Matches
-    : roundOf32Matches.slice(0, 3);
-
-  const displayedRoundOf16Matches = expandedKnockouts.roundOf16
-    ? roundOf16Matches
-    : roundOf16Matches.slice(0, 3);
-
-  const displayedQuarterFinalMatches = expandedKnockouts.quarterFinals
-    ? quarterFinalMatches
-    : quarterFinalMatches.slice(0, 3);
+  const displayedRoundOf32Matches    = expandedKnockouts.roundOf32    ? roundOf32Matches    : roundOf32Matches.slice(0, 3);
+  const displayedRoundOf16Matches    = expandedKnockouts.roundOf16    ? roundOf16Matches    : roundOf16Matches.slice(0, 3);
+  const displayedQuarterFinalMatches = expandedKnockouts.quarterFinals ? quarterFinalMatches : quarterFinalMatches.slice(0, 3);
 
   function showAllKnockoutMatches(stage) {
     setExpandedKnockouts(prev => ({ ...prev, [stage]: true }));
@@ -1304,7 +1159,7 @@ export default function App() {
           <MatchSection
             id="upcoming"
             title="Upcoming Matches"
-            subtitle="Upcoming FIFA World Cup fixtures"
+            subtitle="All upcoming FIFA World Cup 2026 fixtures — times shown in IST"
             matches={upcomingMatches}
             favorites={favorites}
             onToggleFavorite={toggleFavorite}
@@ -1317,7 +1172,7 @@ export default function App() {
           <MatchSection
             id="round-of-32"
             title="Round of 32"
-            subtitle="The first knockout stage"
+            subtitle="28 June – 3 July 2026 | First-ever knockout round at a World Cup"
             matches={displayedRoundOf32Matches}
             favorites={favorites}
             onToggleFavorite={toggleFavorite}
@@ -1331,7 +1186,7 @@ export default function App() {
           <MatchSection
             id="round-of-16"
             title="Round of 16"
-            subtitle="The last 16 teams continue the knockout path"
+            subtitle="4–7 July 2026 | The last 16 teams continue the knockout path"
             matches={displayedRoundOf16Matches}
             favorites={favorites}
             onToggleFavorite={toggleFavorite}
@@ -1345,7 +1200,7 @@ export default function App() {
           <MatchSection
             id="quarter-finals"
             title="Quarter Finals"
-            subtitle="Eight teams, four high-stakes fixtures"
+            subtitle="9–11 July 2026 | Eight teams, four high-stakes fixtures"
             matches={displayedQuarterFinalMatches}
             favorites={favorites}
             onToggleFavorite={toggleFavorite}
@@ -1359,7 +1214,7 @@ export default function App() {
           <MatchSection
             id="semi-finals"
             title="Semi Finals"
-            subtitle="The final four battle for a place in the final"
+            subtitle="14 July: AT&T Stadium Dallas · 15 July: Mercedes-Benz Stadium Atlanta"
             matches={semiFinalMatches}
             favorites={favorites}
             onToggleFavorite={toggleFavorite}
@@ -1370,8 +1225,8 @@ export default function App() {
 
           <MatchSection
             id="final"
-            title="Final"
-            subtitle="The championship match"
+            title="The Final"
+            subtitle="19 July 2026 · MetLife Stadium, New Jersey — 12:30 AM IST (20 July)"
             matches={finalMatches}
             favorites={favorites}
             onToggleFavorite={toggleFavorite}
@@ -1382,17 +1237,11 @@ export default function App() {
         </div>
 
         <TeamsSection favorites={favorites} onToggleFavorite={toggleFavorite} now={now} />
-
         <StandingsSection />
-
         <FavoritesSection favorites={favorites} onToggleFavorite={toggleFavorite} now={now} />
-
         <StadiumExplorer />
-
         <TournamentStatsSection />
-
         <GroupPredictionSection />
-
         <GlobalSearchSection />
       </main>
 
@@ -1402,4 +1251,3 @@ export default function App() {
     </div>
   );
 }
-
